@@ -17,7 +17,7 @@ const RegistrationSchema = new Schema(
     domain1: { type: String, required: true },
     domain2: { type: String, required: true },
     deviceId: { type: String, required: true, unique: true },
-    avatar: { type: String, required: true },
+    avatar: { type: String },
 
   },
   { timestamps: true }

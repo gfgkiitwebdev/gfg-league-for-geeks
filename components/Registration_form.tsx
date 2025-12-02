@@ -23,9 +23,6 @@ import {
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
 import { useRouter } from "next/navigation";
 
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-});
 
 const options = [
   "Web Dev",
