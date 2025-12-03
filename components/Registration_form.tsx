@@ -25,7 +25,6 @@ import { useRouter } from "next/navigation";
 import { avatars } from "@/lib/utils";
 import Image from "next/image";
 
-
 const options = [
   "Web Dev",
   "App Dev",
@@ -74,7 +73,6 @@ const Registration_form = () => {
   }, []);
 
   useEffect(() => {
-    console.log(formData.deviceId);
 
     const verifyDevice = async () => {
       if (!formData.deviceId) return;
@@ -172,27 +170,43 @@ const Registration_form = () => {
           </Field>
 
           <Field>
-            <FieldLabel className="text-lg font-semibold">Choose Avatar</FieldLabel>
+            <FieldLabel className="text-lg font-semibold">
+              Choose Avatar
+            </FieldLabel>
+
             <div className="grid grid-cols-4 gap-4 mt-2">
-              {avatars.map((avatar) => (
-                <div
-                  key={avatar.id}
-                  onClick={() => setFormData((prev) => ({ ...prev, avatar: avatar.img }))}
-                  className={`relative w-16 h-16 m-auto cursor-pointer rounded-full overflow-hidden transition-all bg-transparent ${
-                    formData.avatar === avatar.img
-                      ? "ring-2 ring-green-500 scale-110 shadow-[0_0_10px_rgba(34,197,94,0.5)]"
-                      : "ring-0 hover:ring-2 hover:ring-white/50"
-                  }`}
-                >
-                  <Image
-                    src={avatar.img}
-                    alt={avatar.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+              {avatars.map((avatar) => {
+                const optimizedImg = avatar.img.replace(
+                  "/upload/",
+                  "/upload/c_fill,w_96,h_96,q_auto,f_auto/"
+                );
+
+                return (
+                  <div
+                    key={avatar.id}
+                    onClick={() =>
+                      setFormData((prev) => ({ ...prev, avatar: avatar.img }))
+                    }
+                    className={`relative w-16 h-16 m-auto cursor-pointer rounded-full overflow-hidden transition-all bg-transparent ${
+                      formData.avatar === avatar.img
+                        ? "ring-2 ring-green-500 scale-110 shadow-[0_0_10px_rgba(34,197,94,0.5)]"
+                        : "ring-0 hover:ring-2 hover:ring-white/50"
+                    }`}
+                  >
+                    <Image
+                      src={optimizedImg}
+                      alt={avatar.name}
+                      fill
+                      sizes="64px"
+                      loading="lazy"
+                      priority={false}
+                      className="object-cover transition-opacity duration-300"
+                    />
+                  </div>
+                );
+              })}
             </div>
+
             <FieldDescription className="text-white/60">
               Select an avatar for your profile.
             </FieldDescription>

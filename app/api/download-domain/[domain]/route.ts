@@ -11,18 +11,24 @@ export async function GET(
     const resolvedParams = await params;
     const rawDomain = resolvedParams.domain;
     
-    const domain = decodeURIComponent(rawDomain);
+    let domain = decodeURIComponent(rawDomain);
+
+    if (domain === "AI-ML") {
+      domain = "AI/ML";
+    }
+    
+    console.log(`Searching for domain: "${domain}"`);
 
     await dbConnect();
 
-    // Fetch Domain1 users
-    const domain1Users = await Registration.find({ domain1: domain });
+    const escapedDomain = domain.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); 
+    const domainRegex = new RegExp(`^${escapedDomain}$`, "i");
 
-    // Fetch Domain2 users
-    
-    console.log(domain1Users);
-    
-    const domain2Users = await Registration.find({ domain2: domain });
+    const domain1Users = await Registration.find({ domain1: { $regex: domainRegex } });
+    console.log(`Found ${domain1Users.length} users in Domain 1`);
+
+    const domain2Users = await Registration.find({ domain2: { $regex: domainRegex } });
+    console.log(`Found ${domain2Users.length} users in Domain 2`);
 
     const section1 = domain1Users.map((u) => ({
       Name: u.username,
@@ -33,6 +39,7 @@ export async function GET(
       Github: u.github,
       LinkedIn: u.linkedin,
       Resume: u.resumeLink,
+      Section: "Domain 1",
     }));
 
     const section2 = domain2Users.map((u) => ({
@@ -44,16 +51,40 @@ export async function GET(
       Github: u.github,
       LinkedIn: u.linkedin,
       Resume: u.resumeLink,
+      Section: "Domain 2",
     }));
-    console.log(section1);
-    
+
     const blankRow = [{}];
 
     const finalSheet = [...section1, ...blankRow, ...section2];
 
     const worksheet = XLSX.utils.json_to_sheet(finalSheet);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, domain);
+
+    let safeSheetName = domain.replace(/[:\/?*\[\]\\]/g, "-");
+    
+    if (safeSheetName.length > 31) {
+      safeSheetName = safeSheetName.substring(0, 31);
+    }
+    if (!safeSheetName) {
+      safeSheetName = "Registrations";
+    }
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, safeSheetName);
+
+    const wscols = [
+        { wch: 20 }, 
+        { wch: 30 }, 
+        { wch: 15 }, 
+        { wch: 10 }, 
+        { wch: 30 }, 
+        { wch: 25 }, 
+        { wch: 25 }, 
+        { wch: 35 }, 
+        { wch: 20 }, 
+        { wch: 15 }, 
+    ];
+    worksheet["!cols"] = wscols;
 
     const buffer = XLSX.write(workbook, {
       type: "buffer",
@@ -63,7 +94,7 @@ export async function GET(
     return new NextResponse(buffer, {
       status: 200,
       headers: {
-        "Content-Disposition": `attachment; filename="${domain}_registrations.xlsx"`,
+        "Content-Disposition": `attachment; filename="${safeSheetName}_registrations.xlsx"`,
         "Content-Type":
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       },
