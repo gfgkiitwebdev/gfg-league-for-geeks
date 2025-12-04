@@ -87,7 +87,7 @@ const landingPage = () => {
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="absolute -left-4 md:-left-16 top-1/2 -translate-y-1/2 w-32 h-32 md:w-64 md:h-64 -z-10"
+              className="hidden sm:block absolute -left-2 sm:-left-4 md:-left-16 top-1/2 -translate-y-1/2 w-20 sm:w-28 md:w-48 lg:w-64 h-20 sm:h-28 md:h-48 lg:h-64 -z-10"
             >
               <Image 
                 src="/pikachu.png" 
@@ -102,7 +102,7 @@ const landingPage = () => {
               initial={{ x: 50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="absolute -right-4 md:-right-16 top-1/2 -translate-y-1/2 w-32 h-32 md:w-64 md:h-64 -z-10"
+              className="hidden sm:block absolute -right-2 sm:-right-4 md:-right-16 top-1/2 -translate-y-1/2 w-20 sm:w-28 md:w-48 lg:w-64 h-20 sm:h-28 md:h-48 lg:h-64 -z-10"
             >
               <Image 
                 src="/nilaPoke.png" 

@@ -152,7 +152,7 @@ export default function DomainShowcase() {
     if (!selectedDomain) return null
 
     return (
-        <div className="w-full max-w-6xl mx-auto p-4 md:p-8 bg-[#A8D5BA] rounded-[40px] border-8 border-[#8FC1A3] shadow-xl font-sans">
+        <div className="w-full max-w-6xl mx-auto p-4 md:p-8 bg-[#A8D5BA] rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border-4 sm:border-6 md:border-8 border-[#8FC1A3] shadow-xl font-sans">
 
             {/* Tab Buttons */}
             <div className="flex justify-center gap-4 mb-8">
@@ -160,7 +160,7 @@ export default function DomainShowcase() {
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab as 'Tech' | 'Non-Tech')}
-                        className={`px-8 py-3 rounded-full text-xl font-bold transition-all duration-300 border-4 ${activeTab === tab
+                        className={`px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full text-sm sm:text-lg md:text-xl font-bold transition-all duration-300 border-2 sm:border-4 ${activeTab === tab
                             ? 'bg-[#2C5E43] text-white border-[#1a3828] shadow-lg scale-105'
                             : 'bg-[#8FC1A3] text-[#2C5E43] border-[#5B8C71] hover:bg-[#7ab392]'
                             }`}
@@ -170,7 +170,7 @@ export default function DomainShowcase() {
                 ))}
             </div>
 
-            <div className="flex flex-col gap-8 h-full min-h-[600px]">
+            <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 h-full min-h-[400px] sm:min-h-[500px] md:min-h-[600px]">
 
                 {/* Top - Thumbnails Row with Arrows */}
                 <div className="flex items-center justify-center gap-4 w-full">

@@ -15,7 +15,7 @@ export const DomainThumbnail: React.FC<DomainThumbnailProps> = ({ domain, isSele
       whileHover={{ y: -5 }}
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
-      className={`flex-shrink-0 w-28 h-36 bg-white rounded-xl border-4 transition-all duration-200 flex flex-col overflow-hidden snap-start ${
+      className={`flex-shrink-0 w-20 sm:w-24 md:w-28 h-28 sm:h-32 md:h-36 bg-white rounded-xl border-2 sm:border-4 transition-all duration-200 flex flex-col overflow-hidden snap-start ${
         isSelected 
           ? 'border-[#2C5E43] ring-4 ring-[#5B8C71]/30 shadow-lg scale-105 z-10' 
           : 'border-[#8FC1A3] hover:border-[#5B8C71] opacity-80 hover:opacity-100'

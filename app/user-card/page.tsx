@@ -45,8 +45,8 @@ const UserCard = () => {
   }, []);
 
   return (
-    <div className="w-full flex justify-center py-10">
-      <div className="relative w-[420px] h-[500px]">
+    <div className="w-full flex justify-center py-10 px-4">
+      <div className="relative w-full max-w-[420px]">
         {/* CARD BACKGROUND */}
         <Image
           src={cardBg}
