@@ -45,8 +45,24 @@ const UserCard = () => {
   }, []);
 
   return (
-    <div className="w-full flex justify-center py-10 px-4">
-      <div className="relative w-full max-w-[420px]">
+    <div className="relative min-h-screen bg-linear-to-b from-[#0B1810] to-[#00FF80] p-4">
+      {/* GFG Logo */}
+      <div className="absolute top-2 left-4 md:left-8 z-10">
+        <Image src="/image.png" alt="GFG Logo" width={200} height={200} className="w-20 sm:w-28 md:w-40 lg:w-48 h-auto" />
+      </div>
+
+      <div className="w-full flex flex-col items-center py-10 px-4">
+        {/* Congratulatory Message - Above the card */}
+        <div className="text-center mb-6">
+          <p className="text-white font-bold text-2xl">
+            🎉 Congrats on your registration!
+          </p>
+          <p className="text-green-300 text-lg mt-2">
+            See you, Trainer! Your journey begins now! 🚀
+          </p>
+        </div>
+
+        <div className="relative w-full max-w-[420px]">
         {/* CARD BACKGROUND */}
         <Image
           src={cardBg}
@@ -100,6 +116,7 @@ const UserCard = () => {
             </button>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
