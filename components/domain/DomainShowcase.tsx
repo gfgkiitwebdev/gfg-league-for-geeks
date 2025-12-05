@@ -11,28 +11,28 @@ const MOCK_DOMAINS: Domain[] = [
     {
         id: '001',
         name: 'WEB DEV',
-        description: 'Building the web of tomorrow with modern technologies and frameworks. From frontend aesthetics to backend robustness.',
+        description: 'You don\'t code — you command, like a king ruling a digital empire. Your lines of code are royal decrees, and every pixel bends the knee. You forge kingdoms out of CSS, conquer chaos with JavaScript, and crown ideas with UI. Others surf the web… but you sit on the throne and rewrite the internet in your image.',
         type: 'Tech',
         image: '/webDev.png'
     },
     {
         id: '002',
         name: 'APP DEV',
-        description: 'Creating robust mobile applications for Android and iOS platforms using modern frameworks like Flutter and React Native.',
+        description: 'App Dev is just evolution chains but with frameworks — React → React Native → Existential Crisis.If that made sense to you then do join us. In this domain, we don\'t just catch Pokémon, we catch exceptions, null pointers, and emotional damage from runtime errors.',
         type: 'Tech',
         image: '/app-dev.jpeg'
     },
     {
         id: '009',
         name: 'AI/ML',
-        description: 'Exploring the frontiers of Artificial Intelligence and Machine Learning. Building smart systems that learn and adapt.',
+        description: 'Step into AI/ML where machines learn faster than you can blink, patterns hide in data like secrets, and every prediction feels like a Pikachu Thunderbolt to your brain. Curious? Good—it\'s supposed to shock you!',
         type: 'Tech',
         image: '/ai-ml.jpeg'
     },
     {
         id: '010',
         name: 'SYSTEMS DEV',
-        description: 'Diving deep into low-level programming, operating systems, and system architecture. Optimizing performance at the core.',
+        description: 'Turn your DSA knowledge into wonderful projects. Befriend the command line and Linux OS.  Learn about how to design applications for millions of users.',
         type: 'Tech',
         image: '/systems-dev.png'
     },
@@ -46,14 +46,14 @@ const MOCK_DOMAINS: Domain[] = [
     {
         id: '012',
         name: 'GAME DEV',
-        description: 'Crafting immersive interactive experiences. From game physics to storytelling, bringing virtual worlds to life.',
+        description: 'Game development is the ultimate power trip. It\'s the art of turning boring lines of code into living, breathing worlds. You aren\'t just a coder here, you are the architect of physics, the director of drama, and the master of fun. Why just play the hero when you can build the universe?',
         type: 'Tech',
         image: '/game-dev.jpg'
     },
     {
         id: '013',
         name: 'CLOUD',
-        description: 'Mastering cloud infrastructure and DevOps. Scalable solutions, containerization, and continuous deployment.',
+        description: 'Building legendary infrastructures in the cloud, where resilience, automation, and speed rule the battlefield.',
         type: 'Tech',
         image: '/cloud.jpeg'
     },
@@ -81,14 +81,14 @@ const MOCK_DOMAINS: Domain[] = [
     {
         id: '004',
         name: 'MARKETING',
-        description: 'Strategizing and executing campaigns to promote events and the chapter. Reaching out to the target audience effectively.',
+        description: 'We don\'t just wait for evolution; we actively drive growth, turning basic ideas into legendary brands as we strive to \"catch \'em all\"—every bit of engagement and community reach possible! ',
         type: 'Non-Tech',
         image: '/marketing.png'
     },
     {
         id: '005',
         name: 'SOCIAL MEDIA',
-        description: 'Managing online presence and engaging with the community across platforms. Creating content that resonates.',
+        description: ' Social Media—the ultimate curation challenge. It\'s where strategy meets spontaneity, and your personal brand becomes legendary.',
         type: 'Non-Tech',
         image: '/socmed.png'
     },
@@ -102,7 +102,7 @@ const MOCK_DOMAINS: Domain[] = [
     {
         id: '007',
         name: 'BROADCASTING',
-        description: 'Managing audio-visual content and live streaming of events. Capturing moments and sharing them with the world.',
+        description: 'Welcome to the Broadcasting Domain, where we don\'t just watch the action—we capture \em all! From wild events to legendary content, we make sure your memories are always super effective!',
         type: 'Non-Tech',
         image: '/broadcasting.png'
     },
@@ -119,12 +119,24 @@ export default function DomainShowcase() {
     const [domains] = useState<Domain[]>(MOCK_DOMAINS)
     const [activeTab, setActiveTab] = useState<'Tech' | 'Non-Tech'>('Tech')
     const [activeIndex, setActiveIndex] = useState(0)
+    const [isMobile, setIsMobile] = useState(false)
+    const [isXL, setIsXL] = useState(false)
 
     const filteredDomains = domains.filter(domain => domain.type === activeTab)
 
     useEffect(() => {
         setActiveIndex(0)
     }, [activeTab])
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768)
+            setIsXL(window.innerWidth >= 1280)
+        }
+        handleResize()
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     const handlePrev = () => {
         setActiveIndex(prev => (prev === 0 ? filteredDomains.length - 1 : prev - 1))
@@ -135,20 +147,72 @@ export default function DomainShowcase() {
     }
 
     const activeDomain = filteredDomains[activeIndex]
-    const prevDomain = filteredDomains.length > 1 
-        ? filteredDomains[(activeIndex - 1 + filteredDomains.length) % filteredDomains.length] 
-        : null
-    const nextDomain = filteredDomains.length > 1 
-        ? filteredDomains[(activeIndex + 1) % filteredDomains.length] 
-        : null
-    const prevPrevDomain = filteredDomains.length > 2
-        ? filteredDomains[(activeIndex - 2 + filteredDomains.length) % filteredDomains.length]
-        : null
-    const nextNextDomain = filteredDomains.length > 2
-        ? filteredDomains[(activeIndex + 2) % filteredDomains.length]
-        : null
 
     if (!activeDomain) return null
+
+    const getCardStyle = (index: number) => {
+        const length = filteredDomains.length
+        let offset = (index - activeIndex)
+
+        // Handle wrapping for shortest path
+        if (offset > length / 2) offset -= length
+        if (offset < -length / 2) offset += length
+
+        const absOffset = Math.abs(offset)
+        const isActive = offset === 0
+
+        // Visibility logic
+        // Mobile: Only active is visible (others off-screen)
+        // Desktop: +/- 1 visible
+        // XL: +/- 2 visible
+
+        // We'll use opacity to hide distant cards to prevent "flying across" artifacts being too visible
+        // but we keep them in the DOM for smooth entry
+
+        let zIndex = 50 - absOffset * 10
+        let scale = 1
+        let opacity = 1
+        let blur = 0
+        let x = '0%'
+
+        if (isActive) {
+            scale = 1
+            opacity = 1
+            blur = 0
+            x = '0%'
+        } else if (absOffset === 1) {
+            scale = 0.75
+            opacity = 0.6
+            blur = 1
+            x = offset > 0 ? '18vw' : '-18vw'
+            if (isMobile) {
+                opacity = 0
+                x = offset > 0 ? '100vw' : '-100vw'
+            }
+        } else if (absOffset === 2) {
+            scale = 0.5
+            opacity = 0.4
+            blur = 2
+            x = offset > 0 ? '32vw' : '-32vw'
+            // Hide on smaller screens
+            if (!isXL) { // XL breakpoint
+                opacity = 0
+            }
+        } else {
+            // Hidden cards
+            scale = 0.3
+            opacity = 0
+            x = offset > 0 ? '50vw' : '-50vw'
+        }
+
+        return {
+            x,
+            scale,
+            opacity,
+            zIndex,
+            filter: `blur(${blur}px)`,
+        }
+    }
 
     return (
         <div className="w-full h-screen max-h-screen mx-auto p-2 md:p-4 bg-gfg-bg-main md:rounded-[40px] border-0 md:border-8 border-gfg-text-primary shadow-2xl font-sans flex flex-col items-center justify-between relative overflow-hidden box-border">
@@ -171,69 +235,46 @@ export default function DomainShowcase() {
 
             {/* Carousel Section */}
             <div className="flex items-center justify-center w-full mb-2 md:mb-4 relative z-10 flex-1 min-h-0">
-                
+
                 {/* Left Arrow */}
                 <button
                     onClick={handlePrev}
                     disabled={filteredDomains.length <= 1}
-                    className={`absolute left-0 md:left-8 top-1/2 -translate-y-1/2 p-2 md:p-3 rounded-full bg-gfg-accent-2 text-white border-b-4 border-gfg-button-shadow transition-all active:border-b-0 active:translate-y-[-40%] z-30 shadow-xl ${filteredDomains.length <= 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-gfg-text-primary hover:scale-110'}`}
+                    className={`absolute left-0 md:left-8 top-1/2 -translate-y-1/2 p-2 md:p-3 rounded-full bg-gfg-accent-2 text-white border-b-4 border-gfg-button-shadow transition-all active:border-b-0 active:translate-y-[-40%] z-[60] shadow-xl ${filteredDomains.length <= 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-gfg-text-primary hover:scale-110'}`}
                 >
                     <ChevronLeft size={32} />
                 </button>
 
                 {/* Cards Container */}
-                <div className="flex items-center justify-center gap-4 md:gap-8 h-full w-full px-12 md:px-20">
-                    
-                    {/* PrevPrev Card */}
-                    <div className={`hidden xl:block transition-all duration-500 transform h-[60%] aspect-[3/4] ${prevPrevDomain ? 'opacity-40 scale-50 blur-[2px]' : 'opacity-0 w-0'}`}>
-                        {prevPrevDomain && (
-                                <div className="h-full w-full pointer-events-none">
-                                <DomainMainCard domain={prevPrevDomain} />
+                <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                    {filteredDomains.map((domain, index) => {
+                        const style = getCardStyle(index)
+                        return (
+                            <motion.div
+                                key={domain.id}
+                                initial={false}
+                                animate={style}
+                                transition={{ duration: 0.5, ease: "easeInOut" }}
+                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center"
+                                style={{
+                                    height: '100%',
+                                    aspectRatio: '3/4',
+                                    pointerEvents: index === activeIndex ? 'auto' : 'none'
+                                }}
+                            >
+                                <div className="w-full h-full">
+                                    <DomainMainCard domain={domain} />
                                 </div>
-                        )}
-                    </div>
-
-                    {/* Previous Card */}
-                    <div className={`hidden md:block transition-all duration-500 transform h-[80%] aspect-[3/4] ${prevDomain ? 'opacity-60 scale-75 blur-[1px]' : 'opacity-0 w-0'}`}>
-                        {prevDomain && (
-                             <div className="h-full w-full pointer-events-none">
-                                <DomainMainCard domain={prevDomain} />
-                             </div>
-                        )}
-                    </div>
-
-                    {/* Active Card */}
-                    <div className="z-10 transition-all duration-500 transform scale-100 h-full aspect-[3/4] max-h-full flex items-center justify-center">
-                        <div className="h-full w-full">
-                            <DomainMainCard domain={activeDomain} />
-                        </div>
-                    </div>
-
-                    {/* Next Card */}
-                    <div className={`hidden md:block transition-all duration-500 transform h-[80%] aspect-[3/4] ${nextDomain ? 'opacity-60 scale-75 blur-[1px]' : 'opacity-0 w-0'}`}>
-                        {nextDomain && (
-                            <div className="h-full w-full pointer-events-none">
-                                <DomainMainCard domain={nextDomain} />
-                            </div>
-                        )}
-                    </div>
-
-                    {/* NextNext Card */}
-                    <div className={`hidden xl:block transition-all duration-500 transform h-[60%] aspect-[3/4] ${nextNextDomain ? 'opacity-40 scale-50 blur-[2px]' : 'opacity-0 w-0'}`}>
-                        {nextNextDomain && (
-                            <div className="h-full w-full pointer-events-none">
-                                <DomainMainCard domain={nextNextDomain} />
-                            </div>
-                        )}
-                    </div>
-
+                            </motion.div>
+                        )
+                    })}
                 </div>
 
                 {/* Right Arrow */}
                 <button
                     onClick={handleNext}
                     disabled={filteredDomains.length <= 1}
-                    className={`absolute right-0 md:right-8 top-1/2 -translate-y-1/2 p-2 md:p-3 rounded-full bg-gfg-accent-2 text-white border-b-4 border-gfg-button-shadow transition-all active:border-b-0 active:translate-y-[-40%] z-30 shadow-xl ${filteredDomains.length <= 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-gfg-text-primary hover:scale-110'}`}
+                    className={`absolute right-0 md:right-8 top-1/2 -translate-y-1/2 p-2 md:p-3 rounded-full bg-gfg-accent-2 text-white border-b-4 border-gfg-button-shadow transition-all active:border-b-0 active:translate-y-[-40%] z-[60] shadow-xl ${filteredDomains.length <= 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-gfg-text-primary hover:scale-110'}`}
                 >
                     <ChevronRight size={32} />
                 </button>
@@ -248,7 +289,7 @@ export default function DomainShowcase() {
                     <p className="text-sm md:text-base text-gfg-text-primary font-medium leading-relaxed mb-4 md:mb-6">
                         {activeDomain.description}
                     </p>
-                    
+
                     {/* <div className="mb-2">
                         <h3 className="text-xl md:text-2xl font-black text-gfg-text-primary/40 uppercase">TYPE</h3>
                     </div>
@@ -256,7 +297,7 @@ export default function DomainShowcase() {
                         <span className="text-white font-black text-base md:text-lg uppercase tracking-widest">{activeDomain.type}</span>
                     </div> */}
                 </div>
-{/* 
+                {/* 
                 <div className="w-full md:w-auto flex items-end justify-end self-end mt-4 md:mt-0">
                      <button className="w-full md:w-auto bg-gfg-accent-2 text-white px-6 md:px-8 py-3 md:py-4 rounded-2xl font-black text-lg md:text-xl uppercase tracking-wider border-b-8 border-gfg-button-shadow hover:translate-y-1 hover:border-b-4 active:border-b-0 active:translate-y-2 transition-all shadow-xl">
                       I CHOOSE YOU!
