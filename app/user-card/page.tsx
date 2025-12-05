@@ -2,8 +2,12 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { domToPng } from "modern-screenshot";
-import gfgImage from "@/public/image.png"
+import gfgImage from "@/public/image.png";
+import leagueForGeeks from "@/public/League-For-Geeks.png";
+import Register from "@/public/Register.png";
+import instaIcon from "@/public/insta-icon.png";
 
 export interface UserData {
   username: string;
@@ -126,183 +130,214 @@ const UserCard = () => {
     );
   }
 
- return (
-  <div className="relative min-h-screen bg-linear-to-b from-[#0B1810] to-[#00FF80] p-4 flex flex-col items-center justify-center">
-    {/* GFG Logo */}
-    <div className="absolute top-4 left-4 md:left-8 z-10">
-      <Image
-        src={gfgImage}
-        alt="GFG Logo"
-        width={200}
-        height={200}
-        className="w-16 sm:w-24 md:w-36 lg:w-44 h-auto object-contain"
-      />
-    </div>
-
-    <div className="w-full flex flex-col items-center py-6 px-2 sm:px-4">
-      {/* Heading */}
-      <div className="text-center mb-6">
-        <p className="text-white font-bold text-2xl sm:text-3xl drop-shadow-lg">
-          🎉 Congrats on your registration!
-        </p>
-        <p className="text-green-300 text-base sm:text-lg mt-2 font-medium drop-shadow-md">
-          See you, Trainer! Your journey begins now! 🚀
-        </p>
+  return (
+    <div className="relative min-h-screen bg-linear-to-b from-[#0B1810] to-[#00FF80] p-4 flex flex-col items-center justify-center">
+      {/* GFG Logo */}
+      <div className="absolute top-4 left-4 md:left-8 z-10">
+        <Image
+          src={gfgImage}
+          alt="GFG Logo"
+          width={200}
+          height={200}
+          className="w-16 sm:w-24 md:w-36 lg:w-44 h-auto object-contain"
+        />
       </div>
 
-      <div
-        ref={cardRef}
-        className="relative w-full max-w-[360px] sm:max-w-[380px] aspect-[7/10] rounded-3xl overflow-hidden shadow-2xl"
-      >
-        {/* Background */}
-        <Image
-          src="/card-bg-2.png"
-          alt="Pokemon Card Background"
-          fill
-          className="object-cover pointer-events-none select-none scale-[1.04] z-0"
-          priority
-        />
+      <div className="w-full flex flex-col items-center py-6 px-2 sm:px-4">
+        {/* Heading */}
+        <div className="text-center mb-6">
+          <p className="text-white font-bold text-2xl sm:text-3xl drop-shadow-lg">
+            🎉 Congrats on your registration!
+          </p>
+          <p className="text-green-300 text-base sm:text-lg mt-2 font-medium drop-shadow-md">
+            See you, Trainer! Your journey begins now! 🚀
+          </p>
+        </div>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 flex flex-col z-10 px-3 pt-3">
-          
-          {/* Header */}
-          <div className="flex items-center justify-center py-3">
-            <h1 className="text-[#1a4025] font-bold text-lg sm:text-xl tracking-widest uppercase">
-              LEAGUE FOR GEEKS
-            </h1>
-          </div>
+        <div
+          ref={cardRef}
+          className="relative w-full max-w-[360px] sm:max-w-[380px] aspect-[7/10] rounded-3xl overflow-hidden shadow-2xl"
+        >
+          {/* Background */}
+          <Image
+            src="/card-bg-2.png"
+            alt="Pokemon Card Background"
+            fill
+            className="object-cover pointer-events-none select-none scale-[1.04] z-0"
+            priority
+          />
 
-          {/* Info Section */}
-          <div className="px-2 flex flex-1 items-center justify-center gap-3">
-            
-            {/* Left trainer avatar */}
-            <div className="w-1/3 flex flex-col items-center">
-              <span className="text-[9px] sm:text-[10px] font-bold text-[#1a4025] mb-1 tracking-widest">
-                TRAINER
-              </span>
-              <div className="w-24 h-24 sm:w-28 sm:h-28 border-2 border-green-400 p-1 shadow-sm rounded-full">
-                <div className="relative w-full h-full rounded-full overflow-hidden">
-                  <Image
-                    src={userData.avatar || "/default-avatar.png"}
-                    alt="avatar"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
+          {/* Overlay */}
+          <div className="absolute inset-0 flex flex-col z-10 px-3 pt-3">
+            {/* Header */}
+            <div className="flex items-center justify-center py-3">
+              <Image
+                src={leagueForGeeks}
+                alt="League for Geeks"
+                width={70}
+                height={70}
+                className="w-20 sm:w-24 md:w-28 h-auto object-contain"
+              />
             </div>
 
-            {/* Right info */}
-            <div className="w-1/2 flex flex-col pl-2 sm:pl-4">
-              <div className="text-center mb-4">
-                <span className="text-[9px] sm:text-[10px] font-bold text-[#1a4025] tracking-widest">
-                  INFO
+            {/* Info Section */}
+            <div className="px-2 flex flex-1 items-center justify-center gap-3">
+              {/* Left trainer avatar */}
+              <div className="w-1/3 flex flex-col items-center">
+                <span className="text-[9px] sm:text-[10px] font-bold text-[#1a4025] mb-1 tracking-widest">
+                  TRAINER
                 </span>
+                <div className="w-20 h-20 sm:w-24 sm:h-24 border-2 border-green-400 p-1 shadow-sm rounded-full">
+                  <div className="relative w-full h-full rounded-full overflow-hidden">
+                    <Image
+                      src={userData.avatar || "/default-avatar.png"}
+                      alt="avatar"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
               </div>
 
-              <div className="flex flex-col gap-4">
-                <div>
-                  <h3 className="font-bold text-[#1a4025] text-xs tracking-wider mb-0.5">
-                    NAME :
-                  </h3>
-                  <p className="text-black font-bold text-base sm:text-lg leading-none uppercase truncate">
-                    {userData.username}
-                  </p>
+              {/* Right info */}
+              <div className="w-1/2 flex flex-col pl-2 sm:pl-4">
+                <div className="text-center mb-4">
+                  <span className="text-[9px] sm:text-[10px] font-bold text-[#1a4025] tracking-widest">
+                    INFO
+                  </span>
                 </div>
-                <div>
-                  <h3 className="font-bold text-[#1a4025] text-xs tracking-wider mb-0.5">
-                    LEAGUE :
-                  </h3>
-                  <p className="text-black font-bold text-base sm:text-lg leading-none uppercase truncate">
-                    {userData.domain1}
-                  </p>
+
+                <div className="flex flex-col gap-4">
+                  <div>
+                    <h3 className="font-bold text-[#1a4025] text-xs tracking-wider mb-0.5">
+                      NAME :
+                    </h3>
+                    <p className="text-black font-bold text-base  leading-none uppercase ">
+                      {userData.username}
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[#1a4025] text-xs tracking-wider mb-0.5">
+                      LEAGUE :
+                    </h3>
+                    <p className="text-black font-bold text-base sm:text-lg leading-none uppercase truncate">
+                      {userData.domain1}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Footer */}
-          <div className="flex-1 px-4 flex flex-col justify-center">
-            
-            {/* QR row */}
-            <div className="flex items-center justify-between mb-4 gap-2">
-              
-              {/* Left logo */}
-              <div className="flex flex-col items-center w-20 sm:w-24">
-                <div className="relative w-10 h-10 sm:w-12 sm:h-12 mb-1">
-                  <Image src={gfgImage} alt="GFG Logo" fill className="object-contain" />
+            {/* Footer */}
+            <div className="flex-1 flex flex-col justify-center">
+              {/* QR row */}
+              <div className="flex items-center justify-between mb-6 sm:mb-7 gap-4 sm:gap-6">
+                {/* LEFT BLOCK */}
+                <div className="flex flex-col items-center w-28 sm:w-32">
+                  {/* Logo */}
+                  <div className="relative w-16 h-14 sm:w-20 sm:h-20">
+                    <Image
+                      src={gfgImage}
+                      alt="GFG Logo"
+                      height={70}
+                      width={130}
+                      className="object-contain sm:scale-[1.2] lg:scale-[1.6]"
+                    />
+                  </div>
+
+                  {/* Instagram row */}
+                  <div className="flex items-center">
+                    <Link
+                      href="https://www.instagram.com/gfg_kiit/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center"
+                    >
+                      <Image
+                        src={instaIcon}
+                        alt="Instagram"
+                        width={16}
+                        height={16}
+                        className="object-contain brightness-110"
+                      />
+                      <span className="text-[#d5ff7a] text-[11px] sm:text-[13px] font-semibold">
+                        @gfg_kiit
+                      </span>
+                    </Link>
+                  </div>
                 </div>
-                <p className="text-[7px] sm:text-[9px] text-white font-bold leading-tight text-center">
-                  Student Chapter<br />KIIT<br />@gfg_kiit
-                </p>
-              </div>
 
-              {/* QR */}
-              <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center">
-                <div className="absolute bottom-1 left-1 w-20 h-20 bg-white p-1 shadow-lg">
-                  <Image
-                    src="/qr.png"
-                    alt="QR Code"
-                    width={80}
-                    height={80}
-                    className="object-contain"
-                  />
+                {/* QR (UNCHANGED EXACTLY AS YOU ASKED) */}
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center">
+                  <div className="absolute left-3 w-20 h-20 bg-white p-1 shadow-lg">
+                    <Image
+                      src="/qr.png"
+                      alt="QR Code"
+                      width={80}
+                      height={80}
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+
+                {/* REGISTER BUTTON */}
+                <div className="flex flex-col items-center max-xs:ml-4 max-xxs:ml-7  ml-8 sm:ml-0">
+                  <Link
+                    href="/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src={Register}
+                      alt="Register Now"
+                      width={150}
+                      height={50}
+                      className="object-contain"
+                    />
+                  </Link>
                 </div>
               </div>
 
-              {/* Right text */}
-              <div className="flex flex-col items-center w-20 sm:w-24">
-                <p className="text-[7px] sm:text-[10px] text-white font-bold leading-tight text-left">
-                  Catch yours - get your<br />
-                  own card by<br />
-                  registering!!
-                </p>
-              </div>
+              {/* Bottom icons */}
+              <div className="flex px-3 flex-col justify-center items-center">
+                <div className="w-full flex items-center justify-between px-4 mt-2">
+                  <span className="text-white text-right ml-2 font-bold text-[9px] sm:text-[10px] drop-shadow-md">
+                    The best
+                    <br />
+                    hackathon to be!
+                  </span>
 
+                  <div className="flex gap-1">
+                    <Image src="/star.png" alt="star" width={18} height={18} />
+                    <Image src="/star.png" alt="star" width={18} height={18} />
+                    <Image src="/star.png" alt="star" width={18} height={18} />
+                  </div>
+                </div>
+
+                <div className="flex justify-center gap-4 mt-2">
+                  <Image src="/nilapoke.png" width={28} height={28} alt="" />
+                  <Image src="/Bulbasaur.png" width={28} height={28} alt="" />
+                  <Image src="/odish.png" width={28} height={28} alt="" />
+                  <Image src="/caterpie.png" width={28} height={28} alt="" />
+                </div>
+              </div>
             </div>
-
-            {/* Bottom icons */}
-            <div className="flex flex-col justify-center items-center">
-              <div className="w-full flex items-center justify-between px-4 mt-2">
-                <span className="text-white font-bold text-[9px] sm:text-[10px] drop-shadow-md">
-                  The best<br />hackathon to be!
-                </span>
-
-                <div className="flex gap-1">
-                  <Image src="/star.png" alt="star" width={18} height={18} />
-                  <Image src="/star.png" alt="star" width={18} height={18} />
-                  <Image src="/star.png" alt="star" width={18} height={18} />
-                </div>
-              </div>
-
-              <div className="flex justify-center gap-4 mt-2">
-                <Image src="/nilapoke.png" width={28} height={28} alt="" />
-                <Image src="/Bulbasaur.png" width={28} height={28} alt="" />
-                <Image src="/odish.png" width={28} height={28} alt="" />
-                <Image src="/caterpie.png" width={28} height={28} alt="" />
-              </div>
-            </div>
-
           </div>
         </div>
-      </div>
 
-      {/* Share Button */}
-      <div className="mt-2 w-full max-w-[300px]">
-        <button
-          onClick={handleShareToInstagram}
-          disabled={isSharing}
-          className="w-full py-3 bg-[#1a4025] border-2 border-[#c5a059] text-white font-bold rounded-xl shadow-lg flex items-center justify-center gap-3 hover:bg-[#2a5c3f] transition-colors uppercase tracking-wide text-sm disabled:opacity-50"
-        >
-          {isSharing ? "Generating..." : "Share it on your instagram"}
-        </button>
+        {/* Share Button */}
+        <div className="mt-2 w-full max-w-[300px]">
+          <button
+            onClick={handleShareToInstagram}
+            disabled={isSharing}
+            className="w-full py-3 bg-[#1a4025] border-2 border-[#c5a059] text-white font-bold rounded-xl shadow-lg flex items-center justify-center gap-3 hover:bg-[#2a5c3f] transition-colors uppercase tracking-wide text-sm disabled:opacity-50"
+          >
+            {isSharing ? "Generating..." : "Share it on your instagram"}
+          </button>
+        </div>
       </div>
-
     </div>
-  </div>
-);
-
+  );
 };
 
 export default UserCard;
