@@ -145,10 +145,10 @@ export default function DomainShowcase() {
     if (!activeDomain) return null
 
     return (
-        <div className="w-full mx-auto p-4 md:p-8 bg-gfg-bg-main rounded-[30px] md:rounded-[50px] border-8 border-gfg-text-primary shadow-2xl font-sans flex flex-col items-center relative overflow-hidden">
+        <div className="w-full h-screen max-h-screen mx-auto p-2 md:p-4 bg-gfg-bg-main md:rounded-[40px] border-0 md:border-8 border-gfg-text-primary shadow-2xl font-sans flex flex-col items-center justify-between relative overflow-hidden box-border">
 
             {/* Tab Buttons */}
-            <div className="flex justify-center gap-4 mb-8 z-10">
+            <div className="flex justify-center gap-4 mb-2 md:mb-4 z-10 flex-shrink-0">
                 {['Tech', 'Non-Tech'].map((tab) => (
                     <button
                         key={tab}
@@ -164,7 +164,7 @@ export default function DomainShowcase() {
             </div>
 
             {/* Carousel Section */}
-            <div className="flex items-center justify-center w-full mb-8 relative z-10">
+            <div className="flex items-center justify-center w-full mb-2 md:mb-4 relative z-10 flex-1 min-h-0">
                 
                 {/* Left Arrow */}
                 <button
@@ -176,28 +176,28 @@ export default function DomainShowcase() {
                 </button>
 
                 {/* Cards Container */}
-                <div className="flex items-center justify-center gap-4 md:gap-8 h-[300px] md:h-[400px] w-full px-12 md:px-20">
+                <div className="flex items-center justify-center gap-4 md:gap-8 h-full w-full px-12 md:px-20">
                     
                     {/* Previous Card */}
-                    <div className={`hidden md:block transition-all duration-500 transform ${prevDomain ? 'opacity-60 scale-75 blur-[1px]' : 'opacity-0 w-0'}`}>
+                    <div className={`hidden md:block transition-all duration-500 transform h-[80%] aspect-[3/4] ${prevDomain ? 'opacity-60 scale-75 blur-[1px]' : 'opacity-0 w-0'}`}>
                         {prevDomain && (
-                             <div className="w-[180px] md:w-[240px] pointer-events-none">
+                             <div className="h-full w-full pointer-events-none">
                                 <DomainMainCard domain={prevDomain} />
                              </div>
                         )}
                     </div>
 
                     {/* Active Card */}
-                    <div className="z-10 transition-all duration-500 transform scale-100">
-                        <div className="w-[220px] md:w-[300px]">
+                    <div className="z-10 transition-all duration-500 transform scale-100 h-full aspect-[3/4] max-h-full flex items-center justify-center">
+                        <div className="h-full w-full">
                             <DomainMainCard domain={activeDomain} />
                         </div>
                     </div>
 
                     {/* Next Card */}
-                    <div className={`hidden md:block transition-all duration-500 transform ${nextDomain ? 'opacity-60 scale-75 blur-[1px]' : 'opacity-0 w-0'}`}>
+                    <div className={`hidden md:block transition-all duration-500 transform h-[80%] aspect-[3/4] ${nextDomain ? 'opacity-60 scale-75 blur-[1px]' : 'opacity-0 w-0'}`}>
                         {nextDomain && (
-                            <div className="w-[180px] md:w-[240px] pointer-events-none">
+                            <div className="h-full w-full pointer-events-none">
                                 <DomainMainCard domain={nextDomain} />
                             </div>
                         )}
@@ -216,25 +216,25 @@ export default function DomainShowcase() {
             </div>
 
             {/* Info Section */}
-            <div className="w-full max-w-5xl bg-gfg-bg-secondary p-6 md:p-10 rounded-[40px] border-8 border-gfg-accent-2 relative z-10 flex flex-col md:flex-row gap-8 items-start justify-between">
+            <div className="w-full max-w-5xl bg-gfg-bg-secondary p-4 md:p-6 rounded-[30px] border-4 md:border-8 border-gfg-accent-2 relative z-10 flex flex-col md:flex-row gap-4 md:gap-8 items-start justify-between flex-shrink-0">
                 <div className="flex-1 text-left">
-                    <h2 className="text-4xl md:text-6xl font-black text-gfg-accent-1 mb-4 uppercase tracking-tighter drop-shadow-[4px_4px_0px_rgba(44,94,67,1)]" style={{ WebkitTextStroke: '2px #2C5E43' }}>
+                    <h2 className="text-3xl md:text-5xl font-black text-gfg-accent-1 mb-2 md:mb-4 uppercase tracking-tighter drop-shadow-[4px_4px_0px_rgba(44,94,67,1)]" style={{ WebkitTextStroke: '2px #2C5E43' }}>
                         {activeDomain.name}
                     </h2>
-                    <p className="text-lg md:text-xl text-gfg-text-primary font-medium leading-relaxed mb-6">
+                    <p className="text-base md:text-lg text-gfg-text-primary font-medium leading-relaxed mb-4 md:mb-6">
                         {activeDomain.description}
                     </p>
                     
                     <div className="mb-2">
-                        <h3 className="text-3xl font-black text-gfg-text-primary/40 uppercase">TYPE</h3>
+                        <h3 className="text-2xl md:text-3xl font-black text-gfg-text-primary/40 uppercase">TYPE</h3>
                     </div>
-                    <div className="inline-block bg-gfg-accent-1 px-12 py-3 rounded-xl border-b-4 border-gfg-accent-2/50">
-                        <span className="text-white font-black text-xl uppercase tracking-widest">{activeDomain.type}</span>
+                    <div className="inline-block bg-gfg-accent-1 px-8 md:px-12 py-2 md:py-3 rounded-xl border-b-4 border-gfg-accent-2/50">
+                        <span className="text-white font-black text-lg md:text-xl uppercase tracking-widest">{activeDomain.type}</span>
                     </div>
                 </div>
 
                 <div className="w-full md:w-auto flex items-end justify-end self-end mt-4 md:mt-0">
-                     <button className="w-full md:w-auto bg-gfg-accent-2 text-white px-8 py-4 rounded-2xl font-black text-xl uppercase tracking-wider border-b-8 border-gfg-button-shadow hover:translate-y-1 hover:border-b-4 active:border-b-0 active:translate-y-2 transition-all shadow-xl">
+                     <button className="w-full md:w-auto bg-gfg-accent-2 text-white px-6 md:px-8 py-3 md:py-4 rounded-2xl font-black text-lg md:text-xl uppercase tracking-wider border-b-8 border-gfg-button-shadow hover:translate-y-1 hover:border-b-4 active:border-b-0 active:translate-y-2 transition-all shadow-xl">
                         {activeDomain.name},<br/>I CHOOSE YOU
                     </button>
                 </div>
