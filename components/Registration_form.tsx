@@ -108,14 +108,13 @@ const Registration_form = () => {
       });
 
       const data = await res.json();
-      console.log(data);
       
       if (!res.ok) {
-        console.log("Validation Errors:", data.errors || data.message);
+        alert(`Validation Errors:, ${data.errors || data.message}`);
         return;
       }
       localStorage.setItem("id",data.saved._id)
-      // router.push("/user-card");
+      router.push("/user-card");
     } catch (error) {
       console.error("Submit Error:", error);
     }
