@@ -161,7 +161,7 @@ const UserCard = () => {
             {/* Header Area */}
             <div className="h-[10%] flex items-center justify-center ">
               <h1 className="text-[#1a4025] font-bold text-xl tracking-widest uppercase drop-shadow-sm">
-                STAGE 2 🌿 EVOLVE
+                LEAGUE FOR GEEKS
               </h1>
             </div>
 
@@ -214,21 +214,33 @@ const UserCard = () => {
             </div>
 
             {/* Footer Area */}
-            <div className="flex-1 px-6 pt-2 pb-4 flex flex-col justify-center">
+            <div className="flex-1 px-4 pt-2 pb-4 flex flex-col justify-center">
               {/* QR Row */}
               <div className="flex items-center justify-between mb-2">
-                <p className="text-[9px] text-white font-bold w-20 leading-tight text-center drop-shadow-md">
-                  Join the Crew & Earn Your Badges!
-                </p>
+                {/* Left Side - GFG Logo + Text */}
+                <div className="flex flex-col items-center w-28">
+                  <div className="relative w-50 h-50 mb-1">
+                    <Image
+                      src="/image.png"
+                      alt="GFG Logo"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  <p className="text-[8px] text-white font-bold leading-tight text-center drop-shadow-md">
+                    GFG Hackathon<br/>The best hackathon to be!<br/>Register Now!
+                  </p>
+                </div>
 
-                {/* QR Code Box */}
-                {/* Placeholder for QR */}
-                {/* <div className="w-20 h-20 bg-gray-300 border-2 border-white/50 shadow-inner mx-2">
-                </div> */}
+                {/* QR Code Box - Center */}
+               
 
-                <p className="text-[9px] text-white font-bold w-20 leading-tight text-center drop-shadow-md">
-                  Catch yours - get your own pokemon card by registering!!
-                </p>
+                {/* Right Side - Promotional Text */}
+                <div className="flex flex-col items-center w-28">
+                   <p className="text-[8px] text-white font-bold leading-tight text-center drop-shadow-md">
+                    Join the League!<br/>Code. Create. Conquer.<br/>Unleash your potential!
+                  </p>
+                </div>
               </div>
             </div>
           </div>
