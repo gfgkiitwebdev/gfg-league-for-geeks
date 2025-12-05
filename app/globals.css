@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -145,4 +149,11 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+}
+@theme {
+  
+  --breakpoint-xxs: 380px;
+  --breakpoint-xs: 580px;
+  --breakpoint-tablet: 800px;
+  --breakpoint-3xl: 1600px;
 }
