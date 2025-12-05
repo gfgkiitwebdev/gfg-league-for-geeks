@@ -105,7 +105,7 @@ const landingPage = () => {
               className="hidden sm:block absolute -right-2 sm:-right-4 md:-right-16 top-1/2 -translate-y-1/2 w-20 sm:w-28 md:w-48 lg:w-64 h-20 sm:h-28 md:h-48 lg:h-64 -z-10"
             >
               <Image 
-                src="/nilaPoke.png" 
+                src="/nilapoke.png" 
                 alt="Squirtle" 
                 fill 
                 className="object-contain drop-shadow-2xl -rotate-12 hover:scale-110 transition-transform duration-300"
