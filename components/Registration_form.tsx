@@ -79,7 +79,6 @@ const Registration_form = () => {
   }, []);
 
   useEffect(() => {
-
     const verifyDevice = async () => {
       if (!formData.deviceId) return;
 
@@ -114,12 +113,12 @@ const Registration_form = () => {
       });
 
       const data = await res.json();
-      
+
       if (!res.ok) {
         alert(`Validation Errors:, ${data.errors || data.message}`);
         return;
       }
-      localStorage.setItem("id",data.saved._id)
+      localStorage.setItem("id", data.saved._id);
       router.push("/user-card");
     } catch (error) {
       console.error("Submit Error:", error);
@@ -129,7 +128,6 @@ const Registration_form = () => {
     <div className="w-full max-w-5xl text-white bg-black/20 p-4 sm:p-6 lg:p-8 rounded-2xl border border-white/10 backdrop-blur-md shadow-2xl">
       <FieldSet>
         <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-3">
-          
           <Field className="md:col-span-2">
             <FieldLabel className="text-base sm:text-lg font-semibold">
               Choose Avatar
@@ -173,7 +171,10 @@ const Registration_form = () => {
             </FieldDescription>
           </Field>
           <Field>
-            <FieldLabel htmlFor="username" className="text-base sm:text-lg font-semibold">
+            <FieldLabel
+              htmlFor="username"
+              className="text-base sm:text-lg font-semibold"
+            >
               Full Name
             </FieldLabel>
             <Input
@@ -187,7 +188,10 @@ const Registration_form = () => {
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="contact" className="text-base sm:text-lg font-semibold">
+            <FieldLabel
+              htmlFor="contact"
+              className="text-base sm:text-lg font-semibold"
+            >
               Contact Info
             </FieldLabel>
             <Input
@@ -205,7 +209,10 @@ const Registration_form = () => {
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="email" className="text-base sm:text-lg font-semibold">
+            <FieldLabel
+              htmlFor="email"
+              className="text-base sm:text-lg font-semibold"
+            >
               Email Info
             </FieldLabel>
             <Input
@@ -219,7 +226,9 @@ const Registration_form = () => {
           </Field>
 
           <Field>
-            <FieldLabel className="text-base sm:text-lg font-semibold">Year</FieldLabel>
+            <FieldLabel className="text-base sm:text-lg font-semibold">
+              Year
+            </FieldLabel>
             <Select
               onValueChange={(value) =>
                 setFormData((prev) => ({ ...prev, year: value }))
@@ -240,7 +249,10 @@ const Registration_form = () => {
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="resumeLink" className="text-base sm:text-lg font-semibold">
+            <FieldLabel
+              htmlFor="resumeLink"
+              className="text-base sm:text-lg font-semibold"
+            >
               Resume (Google Drive Link)
             </FieldLabel>
 
@@ -270,7 +282,10 @@ const Registration_form = () => {
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="github" className="text-base sm:text-lg font-semibold">
+            <FieldLabel
+              htmlFor="github"
+              className="text-base sm:text-lg font-semibold"
+            >
               GitHub Profile (Optional)
             </FieldLabel>
             <Input
@@ -284,7 +299,10 @@ const Registration_form = () => {
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="linkedin" className="text-base sm:text-lg font-semibold">
+            <FieldLabel
+              htmlFor="linkedin"
+              className="text-base sm:text-lg font-semibold"
+            >
               LinkedIn Profile (Optional)
             </FieldLabel>
             <Input
@@ -298,7 +316,10 @@ const Registration_form = () => {
           </Field>
 
           <Field className="md:col-span-2">
-            <FieldLabel htmlFor="whyGfg" className="text-base sm:text-lg font-semibold">
+            <FieldLabel
+              htmlFor="whyGfg"
+              className="text-base sm:text-lg font-semibold"
+            >
               Why GFG?
             </FieldLabel>
             <Textarea
@@ -355,9 +376,8 @@ const Registration_form = () => {
           </Field>
 
           <p className="text-xs sm:text-sm text-white/60 mt-2 md:col-span-2">
-            Note: The first preferred domain will involve a hackathon-based
-            evaluation. The second and third preferred domains will follow an
-            interview-based evaluation format.
+            Note : If you want to change your preference there may be provision
+            to do so on the day of the event.
           </p>
 
           <Button
