@@ -35,6 +35,12 @@ const options = [
   "Cloud",
   "CyberSecurity",
   "Competitive Programming",
+  "UI/UX",
+  "Marketing",
+  "Social Media",
+  "Sponsorship",
+  "Broadcasting",
+  "Administration",
 ];
 
 const Registration_form = () => {

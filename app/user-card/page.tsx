@@ -60,7 +60,6 @@ const UserCard = () => {
           }
         }
       }
-
       // Fallback: Download the image
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -218,8 +217,8 @@ const UserCard = () => {
               {/* QR Row */}
               <div className="flex items-center justify-between mb-2">
                 {/* Left Side - GFG Logo + Text */}
-                <div className="flex flex-col items-center w-28">
-                  <div className="relative w-50 h-50 mb-1">
+                <div className="flex flex-col items-center w-24">
+                  <div className="relative w-12 h-12 mb-1">
                     <Image
                       src="/image.png"
                       alt="GFG Logo"
@@ -228,19 +227,57 @@ const UserCard = () => {
                     />
                   </div>
                   <p className="text-[8px] text-white font-bold leading-tight text-center drop-shadow-md">
-                    GFG Hackathon<br/>The best hackathon to be!<br/>Register Now!
+                    Student Chapter<br/>KIIT<br/>@gfg_kiit
                   </p>
                 </div>
 
                 {/* QR Code Box - Center */}
-               
+                <div className="w-20 h-20 bg-white p-1 rounded-sm shadow-inner mx-2 flex items-center justify-center">
+                  <Image
+                    src="/qr.png"
+                    alt="QR Code"
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                  />
+                </div>
 
-                {/* Right Side - Promotional Text */}
-                <div className="flex flex-col items-center w-28">
-                   <p className="text-[8px] text-white font-bold leading-tight text-center drop-shadow-md">
-                    Join the League!<br/>Code. Create. Conquer.<br/>Unleash your potential!
+                {/* Right Side - Register Button */}
+                <div className="flex flex-col items-center w-24">
+                  <button className="bg-[#8B6F47] text-white text-[8px] font-bold px-3 py-1 rounded-full shadow-md mb-1">
+                    REGISTER NOW
+                  </button>
+                  <p className="text-[8px] text-white font-bold leading-tight text-center drop-shadow-md">
+                    Catch yours - get your<br/>own pokemon card by<br/>registering!!
                   </p>
                 </div>
+              </div>
+
+              {/* Bottom Stats Row */}
+              <div className="flex items-end justify-between px-2 mt-2">
+                <span className="text-white font-bold text-[10px] drop-shadow-md">
+                  The best<br/>hackathon to be!
+                </span>
+
+                {/* Pokeball (Center) */}
+                <div className="w-14 h-14 relative flex justify-center items-center">
+                  <div className="w-12 h-12 bg-white rounded-full border-4 border-[#1a4025] overflow-hidden relative shadow-lg">
+                    <div className="absolute top-0 w-full h-1/2 bg-red-600 border-b-4 border-[#1a4025]"></div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white border-2 border-[#1a4025] rounded-full z-10"></div>
+                  </div>
+                </div>
+
+                <div className="flex gap-1 text-yellow-400 text-lg drop-shadow-md">
+                  <span>★</span><span>★</span><span>★</span>
+                </div>
+              </div>
+
+              {/* Small Pokemon Icons */}
+              <div className="flex justify-center gap-2 mt-1 opacity-80">
+                <span className="text-xl">🐢</span>
+                <span className="text-xl">🌿</span>
+                <span className="text-xl">🔥</span>
+                <span className="text-xl">⚡</span>
               </div>
             </div>
           </div>
