@@ -141,6 +141,12 @@ export default function DomainShowcase() {
     const nextDomain = filteredDomains.length > 1 
         ? filteredDomains[(activeIndex + 1) % filteredDomains.length] 
         : null
+    const prevPrevDomain = filteredDomains.length > 2
+        ? filteredDomains[(activeIndex - 2 + filteredDomains.length) % filteredDomains.length]
+        : null
+    const nextNextDomain = filteredDomains.length > 2
+        ? filteredDomains[(activeIndex + 2) % filteredDomains.length]
+        : null
 
     if (!activeDomain) return null
 
@@ -178,6 +184,15 @@ export default function DomainShowcase() {
                 {/* Cards Container */}
                 <div className="flex items-center justify-center gap-4 md:gap-8 h-full w-full px-12 md:px-20">
                     
+                    {/* PrevPrev Card */}
+                    <div className={`hidden xl:block transition-all duration-500 transform h-[60%] aspect-[3/4] ${prevPrevDomain ? 'opacity-40 scale-50 blur-[2px]' : 'opacity-0 w-0'}`}>
+                        {prevPrevDomain && (
+                                <div className="h-full w-full pointer-events-none">
+                                <DomainMainCard domain={prevPrevDomain} />
+                                </div>
+                        )}
+                    </div>
+
                     {/* Previous Card */}
                     <div className={`hidden md:block transition-all duration-500 transform h-[80%] aspect-[3/4] ${prevDomain ? 'opacity-60 scale-75 blur-[1px]' : 'opacity-0 w-0'}`}>
                         {prevDomain && (
@@ -199,6 +214,15 @@ export default function DomainShowcase() {
                         {nextDomain && (
                             <div className="h-full w-full pointer-events-none">
                                 <DomainMainCard domain={nextDomain} />
+                            </div>
+                        )}
+                    </div>
+
+                    {/* NextNext Card */}
+                    <div className={`hidden xl:block transition-all duration-500 transform h-[60%] aspect-[3/4] ${nextNextDomain ? 'opacity-40 scale-50 blur-[2px]' : 'opacity-0 w-0'}`}>
+                        {nextNextDomain && (
+                            <div className="h-full w-full pointer-events-none">
+                                <DomainMainCard domain={nextNextDomain} />
                             </div>
                         )}
                     </div>

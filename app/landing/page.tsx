@@ -61,7 +61,8 @@ const landingPage = () => {
       </nav>
 
       {/* Main Content */}
-      <main className="flex flex-col items-center justify-center min-h-screen relative max-w-7xl mx-auto px-4 pt-32 pb-20">
+      <main className="flex flex-col items-center min-h-screen relative w-full pt-32 pb-20">
+        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center">
 
         {/* Hero Logo */}
         <motion.div
@@ -143,9 +144,10 @@ const landingPage = () => {
             </Link>
           </div>
         </div>
+        </div>
 
         {/* Domain Showcase Section */}
-        <div className="w-full max-w-4xl z-10 mt-8">
+        <div className="w-full z-10 mt-8 px-4">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
