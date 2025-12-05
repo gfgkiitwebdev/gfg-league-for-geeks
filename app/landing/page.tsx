@@ -153,9 +153,7 @@ const landingPage = () => {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12 drop-shadow-md bg-black/30 backdrop-blur-sm py-4 px-8 rounded-xl border border-white/10">
-              Choose Your Path
-            </h2>
+  
             <DomainShowcase />
           </motion.div>
         </div>

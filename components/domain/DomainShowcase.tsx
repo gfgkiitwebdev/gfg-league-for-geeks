@@ -145,17 +145,17 @@ export default function DomainShowcase() {
     if (!activeDomain) return null
 
     return (
-        <div className="w-full max-w-7xl mx-auto p-4 md:p-6 bg-[#A8D5BA] rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border-4 sm:border-6 md:border-8 border-[#8FC1A3] shadow-xl font-sans flex flex-col items-center">
+        <div className="w-full mx-auto p-4 md:p-8 bg-gfg-bg-main rounded-[30px] md:rounded-[50px] border-8 border-gfg-text-primary shadow-2xl font-sans flex flex-col items-center relative overflow-hidden">
 
             {/* Tab Buttons */}
-            <div className="flex justify-center gap-4 mb-6">
+            <div className="flex justify-center gap-4 mb-8 z-10">
                 {['Tech', 'Non-Tech'].map((tab) => (
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab as 'Tech' | 'Non-Tech')}
-                        className={`px-4 py-2 md:px-6 md:py-3 rounded-full text-base md:text-xl font-bold transition-all duration-300 border-4 ${activeTab === tab
-                            ? 'bg-[#2C5E43] text-white border-[#1a3828] shadow-lg scale-105'
-                            : 'bg-[#8FC1A3] text-[#2C5E43] border-[#5B8C71] hover:bg-[#7ab392]'
+                        className={`px-6 py-2 md:px-10 md:py-3 rounded-xl text-lg md:text-2xl font-black uppercase tracking-wider transition-all duration-300 border-b-4 active:border-b-0 active:translate-y-1 ${activeTab === tab
+                            ? 'bg-gfg-accent-2 text-white border-gfg-button-shadow shadow-lg'
+                            : 'bg-gfg-accent-1 text-white border-gfg-accent-2 hover:bg-gfg-accent-2/80'
                             }`}
                     >
                         {tab}
@@ -164,19 +164,19 @@ export default function DomainShowcase() {
             </div>
 
             {/* Carousel Section */}
-            <div className="flex items-center justify-center w-full gap-2 md:gap-8 mb-6 relative">
+            <div className="flex items-center justify-center w-full mb-8 relative z-10">
                 
                 {/* Left Arrow */}
                 <button
                     onClick={handlePrev}
                     disabled={filteredDomains.length <= 1}
-                    className={`p-2 md:p-3 rounded-full bg-[#2C5E43] text-white transition-all z-20 ${filteredDomains.length <= 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#1a3828] hover:scale-110 shadow-lg'}`}
+                    className={`absolute left-0 md:left-8 top-1/2 -translate-y-1/2 p-2 md:p-3 rounded-full bg-gfg-accent-2 text-white border-b-4 border-gfg-button-shadow transition-all active:border-b-0 active:translate-y-[-40%] z-30 shadow-xl ${filteredDomains.length <= 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-gfg-text-primary hover:scale-110'}`}
                 >
-                    <ChevronLeft size={24} className="md:w-8 md:h-8" />
+                    <ChevronLeft size={32} />
                 </button>
 
                 {/* Cards Container */}
-                <div className="flex items-center justify-center gap-4 md:gap-8 h-[300px] md:h-[400px]">
+                <div className="flex items-center justify-center gap-4 md:gap-8 h-[300px] md:h-[400px] w-full px-12 md:px-20">
                     
                     {/* Previous Card */}
                     <div className={`hidden md:block transition-all duration-500 transform ${prevDomain ? 'opacity-60 scale-75 blur-[1px]' : 'opacity-0 w-0'}`}>
@@ -209,21 +209,35 @@ export default function DomainShowcase() {
                 <button
                     onClick={handleNext}
                     disabled={filteredDomains.length <= 1}
-                    className={`p-2 md:p-3 rounded-full bg-[#2C5E43] text-white transition-all z-20 ${filteredDomains.length <= 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#1a3828] hover:scale-110 shadow-lg'}`}
+                    className={`absolute right-0 md:right-8 top-1/2 -translate-y-1/2 p-2 md:p-3 rounded-full bg-gfg-accent-2 text-white border-b-4 border-gfg-button-shadow transition-all active:border-b-0 active:translate-y-[-40%] z-30 shadow-xl ${filteredDomains.length <= 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-gfg-text-primary hover:scale-110'}`}
                 >
-                    <ChevronRight size={24} className="md:w-8 md:h-8" />
+                    <ChevronRight size={32} />
                 </button>
             </div>
 
             {/* Info Section */}
-            <div className="w-full max-w-3xl text-center bg-[#9BCFB0]/50 p-4 md:p-6 rounded-3xl border-4 border-[#5B8C71] backdrop-blur-sm">
-                <h2 className="text-2xl md:text-4xl font-black text-[#2C5E43] mb-2 md:mb-3 uppercase tracking-wider drop-shadow-sm">
-                    {activeDomain.name}
-                </h2>
-                <div className="w-16 md:w-24 h-1 bg-[#2C5E43] mx-auto mb-3 md:mb-4 rounded-full opacity-50"></div>
-                <p className="text-sm md:text-lg text-[#1a3828] font-medium leading-relaxed max-w-2xl mx-auto">
-                    {activeDomain.description}
-                </p>
+            <div className="w-full max-w-5xl bg-gfg-bg-secondary p-6 md:p-10 rounded-[40px] border-8 border-gfg-accent-2 relative z-10 flex flex-col md:flex-row gap-8 items-start justify-between">
+                <div className="flex-1 text-left">
+                    <h2 className="text-4xl md:text-6xl font-black text-gfg-accent-1 mb-4 uppercase tracking-tighter drop-shadow-[4px_4px_0px_rgba(44,94,67,1)]" style={{ WebkitTextStroke: '2px #2C5E43' }}>
+                        {activeDomain.name}
+                    </h2>
+                    <p className="text-lg md:text-xl text-gfg-text-primary font-medium leading-relaxed mb-6">
+                        {activeDomain.description}
+                    </p>
+                    
+                    <div className="mb-2">
+                        <h3 className="text-3xl font-black text-gfg-text-primary/40 uppercase">TYPE</h3>
+                    </div>
+                    <div className="inline-block bg-gfg-accent-1 px-12 py-3 rounded-xl border-b-4 border-gfg-accent-2/50">
+                        <span className="text-white font-black text-xl uppercase tracking-widest">{activeDomain.type}</span>
+                    </div>
+                </div>
+
+                <div className="w-full md:w-auto flex items-end justify-end self-end mt-4 md:mt-0">
+                     <button className="w-full md:w-auto bg-gfg-accent-2 text-white px-8 py-4 rounded-2xl font-black text-xl uppercase tracking-wider border-b-8 border-gfg-button-shadow hover:translate-y-1 hover:border-b-4 active:border-b-0 active:translate-y-2 transition-all shadow-xl">
+                        {activeDomain.name},<br/>I CHOOSE YOU
+                    </button>
+                </div>
             </div>
 
         </div>
