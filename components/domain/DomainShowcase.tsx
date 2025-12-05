@@ -145,15 +145,15 @@ export default function DomainShowcase() {
     if (!activeDomain) return null
 
     return (
-        <div className="w-full max-w-7xl mx-auto p-4 md:p-8 bg-[#A8D5BA] rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border-4 sm:border-6 md:border-8 border-[#8FC1A3] shadow-xl font-sans flex flex-col items-center min-h-[800px]">
+        <div className="w-full max-w-7xl mx-auto p-4 md:p-6 bg-[#A8D5BA] rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border-4 sm:border-6 md:border-8 border-[#8FC1A3] shadow-xl font-sans flex flex-col items-center">
 
             {/* Tab Buttons */}
-            <div className="flex justify-center gap-4 mb-12">
+            <div className="flex justify-center gap-4 mb-6">
                 {['Tech', 'Non-Tech'].map((tab) => (
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab as 'Tech' | 'Non-Tech')}
-                        className={`px-6 py-3 rounded-full text-lg md:text-xl font-bold transition-all duration-300 border-4 ${activeTab === tab
+                        className={`px-4 py-2 md:px-6 md:py-3 rounded-full text-base md:text-xl font-bold transition-all duration-300 border-4 ${activeTab === tab
                             ? 'bg-[#2C5E43] text-white border-[#1a3828] shadow-lg scale-105'
                             : 'bg-[#8FC1A3] text-[#2C5E43] border-[#5B8C71] hover:bg-[#7ab392]'
                             }`}
@@ -164,32 +164,32 @@ export default function DomainShowcase() {
             </div>
 
             {/* Carousel Section */}
-            <div className="flex items-center justify-center w-full gap-4 md:gap-8 mb-12 relative">
+            <div className="flex items-center justify-center w-full gap-2 md:gap-8 mb-6 relative">
                 
                 {/* Left Arrow */}
                 <button
                     onClick={handlePrev}
                     disabled={filteredDomains.length <= 1}
-                    className={`p-3 md:p-4 rounded-full bg-[#2C5E43] text-white transition-all z-20 ${filteredDomains.length <= 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#1a3828] hover:scale-110 shadow-lg'}`}
+                    className={`p-2 md:p-3 rounded-full bg-[#2C5E43] text-white transition-all z-20 ${filteredDomains.length <= 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#1a3828] hover:scale-110 shadow-lg'}`}
                 >
-                    <ChevronLeft size={32} />
+                    <ChevronLeft size={24} className="md:w-8 md:h-8" />
                 </button>
 
                 {/* Cards Container */}
-                <div className="flex items-center justify-center gap-4 md:gap-8 h-[500px]">
+                <div className="flex items-center justify-center gap-4 md:gap-8 h-[300px] md:h-[400px]">
                     
                     {/* Previous Card */}
                     <div className={`hidden md:block transition-all duration-500 transform ${prevDomain ? 'opacity-60 scale-75 blur-[1px]' : 'opacity-0 w-0'}`}>
                         {prevDomain && (
-                             <div className="w-[280px] pointer-events-none">
+                             <div className="w-[180px] md:w-[240px] pointer-events-none">
                                 <DomainMainCard domain={prevDomain} />
                              </div>
                         )}
                     </div>
 
                     {/* Active Card */}
-                    <div className="z-10 transition-all duration-500 transform scale-100 md:scale-110">
-                        <div className="w-[300px] md:w-[340px]">
+                    <div className="z-10 transition-all duration-500 transform scale-100">
+                        <div className="w-[220px] md:w-[300px]">
                             <DomainMainCard domain={activeDomain} />
                         </div>
                     </div>
@@ -197,7 +197,7 @@ export default function DomainShowcase() {
                     {/* Next Card */}
                     <div className={`hidden md:block transition-all duration-500 transform ${nextDomain ? 'opacity-60 scale-75 blur-[1px]' : 'opacity-0 w-0'}`}>
                         {nextDomain && (
-                            <div className="w-[280px] pointer-events-none">
+                            <div className="w-[180px] md:w-[240px] pointer-events-none">
                                 <DomainMainCard domain={nextDomain} />
                             </div>
                         )}
@@ -209,19 +209,19 @@ export default function DomainShowcase() {
                 <button
                     onClick={handleNext}
                     disabled={filteredDomains.length <= 1}
-                    className={`p-3 md:p-4 rounded-full bg-[#2C5E43] text-white transition-all z-20 ${filteredDomains.length <= 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#1a3828] hover:scale-110 shadow-lg'}`}
+                    className={`p-2 md:p-3 rounded-full bg-[#2C5E43] text-white transition-all z-20 ${filteredDomains.length <= 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#1a3828] hover:scale-110 shadow-lg'}`}
                 >
-                    <ChevronRight size={32} />
+                    <ChevronRight size={24} className="md:w-8 md:h-8" />
                 </button>
             </div>
 
             {/* Info Section */}
-            <div className="w-full max-w-3xl text-center bg-[#9BCFB0]/50 p-8 rounded-3xl border-4 border-[#5B8C71] backdrop-blur-sm">
-                <h2 className="text-4xl md:text-5xl font-black text-[#2C5E43] mb-4 uppercase tracking-wider drop-shadow-sm">
+            <div className="w-full max-w-3xl text-center bg-[#9BCFB0]/50 p-4 md:p-6 rounded-3xl border-4 border-[#5B8C71] backdrop-blur-sm">
+                <h2 className="text-2xl md:text-4xl font-black text-[#2C5E43] mb-2 md:mb-3 uppercase tracking-wider drop-shadow-sm">
                     {activeDomain.name}
                 </h2>
-                <div className="w-24 h-1 bg-[#2C5E43] mx-auto mb-6 rounded-full opacity-50"></div>
-                <p className="text-lg md:text-xl text-[#1a3828] font-medium leading-relaxed max-w-2xl mx-auto">
+                <div className="w-16 md:w-24 h-1 bg-[#2C5E43] mx-auto mb-3 md:mb-4 rounded-full opacity-50"></div>
+                <p className="text-sm md:text-lg text-[#1a3828] font-medium leading-relaxed max-w-2xl mx-auto">
                     {activeDomain.description}
                 </p>
             </div>

@@ -145,7 +145,7 @@ const landingPage = () => {
         </div>
 
         {/* Domain Showcase Section */}
-        <div className="w-full max-w-4xl z-10 mt-20">
+        <div className="w-full max-w-4xl z-10 mt-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
