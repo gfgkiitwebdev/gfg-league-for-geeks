@@ -86,7 +86,7 @@ const MOCK_DOMAINS: Domain[] = [
     description:
       "Designing intuitive and attractive user interfaces and experiences. Bridging the gap between functionality and aesthetics.",
     type: "Non-Tech",
-    image: "/pikachu.png",
+    image: "/ui.jpeg",
   },
   {
     id: "004",

@@ -118,7 +118,7 @@ const UserCard = () => {
   }, []);
   useEffect(() => {
     if (!loading && !userData) {
-      localStorage.setItem("isRegistrated","false");
+      localStorage.setItem("isRegistrated", "false");
       toast.error("User not found");
       router.push("/");
     }
@@ -165,7 +165,7 @@ const UserCard = () => {
 
         <div
           ref={cardRef}
-          className="relative w-full max-w-[360px] sm:max-w-[380px] aspect-[7/10] rounded-3xl overflow-hidden shadow-2xl"
+          className="relative w-full max-w-[360px] sm:max-w-[380px] aspect-7/10 rounded-3xl overflow-hidden shadow-2xl"
         >
           {/* Background */}
           <Image
@@ -206,9 +206,12 @@ const UserCard = () => {
                         className="object-cover"
                       />
                     ) : (
-                      <span className="text-white text-3xl font-bold">
-                        {userData.username?.charAt(0).toUpperCase()}
-                      </span>
+                      <Image
+                        src={"https://res.cloudinary.com/gfg-members/image/upload/v1764707505/Ash_p1tl7x.png"}
+                        alt="avatar"
+                        fill
+                        className="object-cover"
+                      />
                     )}
                   </div>
                 </div>
@@ -233,7 +236,7 @@ const UserCard = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-[#1a4025] text-xs tracking-wider mb-0.5">
-                      LEAGUE :
+                      GYM :
                     </h3>
                     <p className="text-black font-bold text-base sm:text-lg leading-none uppercase truncate">
                       {userData.domain1}
