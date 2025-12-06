@@ -8,7 +8,7 @@ import gfgImage from "@/public/image.png";
 import leagueForGeeks from "@/public/League-For-Geeks.png";
 import Register from "@/public/Register.png";
 import instaIcon from "@/public/insta-icon.png";
-
+import qrCode from "@/public/qr.png"
 export interface UserData {
   username: string;
   contact: string;
@@ -270,7 +270,7 @@ const UserCard = () => {
                 <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center">
                   <div className="absolute left-3 w-20 h-20 bg-white p-1 shadow-lg">
                     <Image
-                      src="/qr.png"
+                      src={qrCode}
                       alt="QR Code"
                       width={80}
                       height={80}
