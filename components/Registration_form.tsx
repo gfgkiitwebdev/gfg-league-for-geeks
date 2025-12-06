@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { z } from "zod";
+import { toast } from "sonner";
 import {
   Field,
   FieldDescription,
@@ -102,7 +103,7 @@ const Registration_form = () => {
       console.log("Submitting deviceId:", formData.deviceId);
 
       if (!formData.deviceId) {
-        alert("Device verification failed. Please refresh the page.");
+        toast.error("Device verification failed. Please refresh the page.");
         return;
       }
       const res = await fetch("/api/register", {
@@ -114,11 +115,16 @@ const Registration_form = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(`Validation Errors:, ${data.errors || data.message}`);
+        toast.error(`${data.errors || data.message}`);
         return;
       }
       localStorage.setItem("id", data.saved._id);
-      router.push("/user-card");
+      localStorage.setItem("isRegistrated", "true");
+
+      toast.success("Successfully registered");
+      setTimeout(() => {
+        router.push("/user-card");
+      }, 1000);
     } catch (error) {
       console.error("Submit Error:", error);
     }
@@ -351,8 +357,6 @@ const Registration_form = () => {
               </SelectContent>
             </Select>
           </Field>
-
-         
 
           <p className="text-xs sm:text-sm text-white/60 mt-2 md:col-span-2">
             Note : If you want to change your preference there may be provision

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import DomainShowcase from "@/components/domain/DomainShowcase";
 import gfgLogo from "@/public/image.png";
 import background from "@/public/background.png";
+import { useEffect, useState } from "react";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -15,6 +16,15 @@ const navLinks = [
 ];
 
 const Home = () => {
+  const [isUserRegistered, setIsUserRegistered] = useState<boolean>(false);
+
+  useEffect(() => {
+    (async () => {
+      const value = localStorage.getItem("isRegistrated");
+      setIsUserRegistered(value === "true");
+    })();
+  }, []);
+
   return (
     <div className="min-h-screen relative overflow-x-hidden font-sans text-white selection:bg-green-500 selection:text-black">
       {/* Background Image */}
@@ -143,7 +153,7 @@ const Home = () => {
               </motion.p>
 
               {/* Register Button */}
-              <Link href="/registeration">
+              <Link href={isUserRegistered ? "user-card" : "/registeration"}>
                 <motion.button
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
@@ -157,7 +167,7 @@ const Home = () => {
                     <div className="absolute top-0 left-0 w-full h-[50%] bg-red-600 border-b-2 border-black"></div>
                     <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-white border-2 border-black rounded-full -translate-x-1/2 -translate-y-1/2 z-10"></div>
                   </div>
-                  Register Now
+                  {isUserRegistered ? "Check your Card" : "Register Now"}
                 </motion.button>
               </Link>
             </div>

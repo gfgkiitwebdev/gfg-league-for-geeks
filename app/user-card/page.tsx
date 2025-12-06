@@ -4,11 +4,14 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { domToPng } from "modern-screenshot";
+import { toast } from "sonner";
 import gfgImage from "@/public/image.png";
 import leagueForGeeks from "@/public/League-For-Geeks.png";
 import Register from "@/public/Register.png";
 import instaIcon from "@/public/insta-icon.png";
-import qrCode from "@/public/qr.png"
+import qrCode from "@/public/qr.png";
+import { useRouter } from "next/navigation";
+
 export interface UserData {
   username: string;
   contact: string;
@@ -28,7 +31,7 @@ const UserCard = () => {
   const [loading, setLoading] = useState(true);
   const [isSharing, setIsSharing] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-
+  const router = useRouter();
   const handleShareToInstagram = async () => {
     if (!cardRef.current) return;
 
@@ -76,15 +79,16 @@ const UserCard = () => {
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
 
-      // Show a toast/alert with instructions
-      alert(
-        "📸 Your card has been downloaded!\n\nTo share on Instagram:\n1. Open Instagram\n2. Create a new Story or Post\n3. Select the downloaded image\n4. Tag @gfg_kiit and use #GFGLeague"
+      // Show a toast with instructions
+      toast.success(
+        "📸 Your card has been downloaded!\n\nTo share on Instagram:\n1. Open Instagram\n2. Create a new Story or Post\n3. Select the downloaded image\n4. Tag @gfg_kiit and use #GFGLeague",
+        { duration: 5000 }
       );
 
       setIsSharing(false);
     } catch (error) {
       console.error("Error generating image:", error);
-      alert("Failed to generate image. Please try again.");
+      toast.error("Failed to generate image. Please try again.");
       setIsSharing(false);
     }
   };
@@ -112,7 +116,17 @@ const UserCard = () => {
 
     getUserData();
   }, []);
+  useEffect(() => {
+    if (!loading && !userData) {
+      localStorage.setItem("isRegistrated","false");
+      toast.error("User not found");
+      router.push("/");
+    }
+  }, [loading, userData, router]);
 
+  if (!userData) {
+    return null;
+  }
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black text-green-500 font-bold text-xl">
@@ -122,11 +136,7 @@ const UserCard = () => {
   }
 
   if (!userData) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-black text-red-500 font-bold text-xl">
-        Trainer Data Not Found. Please Register.
-      </div>
-    );
+    return null;
   }
 
   return (
@@ -188,12 +198,18 @@ const UserCard = () => {
                 </span>
                 <div className="w-20 h-20 sm:w-24 sm:h-24 border-2 border-green-400 p-1 shadow-sm rounded-full">
                   <div className="relative w-full h-full rounded-full overflow-hidden">
-                    <Image
-                      src={userData.avatar || "/default-avatar.png"}
-                      alt="avatar"
-                      fill
-                      className="object-cover"
-                    />
+                    {userData.avatar ? (
+                      <Image
+                        src={userData.avatar}
+                        alt="avatar"
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <span className="text-white text-3xl font-bold">
+                        {userData.username?.charAt(0).toUpperCase()}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
