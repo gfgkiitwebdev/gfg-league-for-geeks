@@ -236,7 +236,7 @@ const UserCard = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-[#1a4025] text-xs tracking-wider mb-0.5">
-                      LEAGUE :
+                      GYM :
                     </h3>
                     <p className="text-black font-bold text-base sm:text-lg leading-none uppercase truncate">
                       {userData.domain1}
