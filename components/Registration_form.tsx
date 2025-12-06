@@ -120,7 +120,7 @@ const Registration_form = () => {
       }
       localStorage.setItem("id", data.saved._id);
       localStorage.setItem("isRegistrated", "true");
-      
+
       fetch("/api/save-to-sheet", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -14,8 +14,8 @@ const registrationSchema = z.object({
 
   resumeLink: z.string().optional(),
 
-  // github: z.string().url().optional().or(z.literal("")),
-  // linkedin: z.string().url().optional().or(z.literal("")),
+  github: z.string().url().optional().or(z.literal("")),
+  linkedin: z.string().url().optional().or(z.literal("")),
 
   whyGfg: z.string().min(5, "Please explain why you want to join"),
 
@@ -76,7 +76,6 @@ export async function POST(request: Request) {
 
     // Save to DB
     const saved = await Registration.create(data);
-
 
     return NextResponse.json(
       {
