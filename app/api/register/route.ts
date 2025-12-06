@@ -46,18 +46,6 @@ export async function POST(request: Request) {
 
     const data = parsed.data;
 
-    // Extra rule for resume
-    if ((data.year === "2" || data.year === "3") && !data.resumeLink) {
-      return NextResponse.json(
-        {
-          success: false,
-          message:
-            "Resume is mandatory for 2nd and 3rd year students. Please provide a Google Drive link.",
-        },
-        { status: 400 }
-      );
-    }
-
     // Connect to DB
     await dbConnect();
     const existingDevice = await Registration.findOne({

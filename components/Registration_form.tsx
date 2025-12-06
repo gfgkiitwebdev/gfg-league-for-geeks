@@ -258,7 +258,7 @@ const Registration_form = () => {
               htmlFor="resumeLink"
               className="text-base sm:text-lg font-semibold"
             >
-              Resume (Google Drive Link)
+              Resume (Optional)
             </FieldLabel>
 
             <Input
@@ -266,23 +266,12 @@ const Registration_form = () => {
               type="url"
               value={formData.resumeLink}
               onChange={handleChange}
-              disabled={!formData.year}
-              placeholder={
-                formData.year
-                  ? "https://drive.google.com/..."
-                  : "Select your year first"
-              }
-              className={`bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-green-400 focus:ring-green-400/20 
-      ${!formData.year ? "opacity-50 cursor-not-allowed" : ""}`}
-              required={formData.year === "2" || formData.year === "3"}
+              placeholder="https://drive.google.com/..."
+              className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-green-400 focus:ring-green-400/20"
             />
 
             <FieldDescription className="text-xs sm:text-sm text-white/60 mt-1">
-              {formData.year === "1"
-                ? "Optional for 1st year students."
-                : formData.year === "2" || formData.year === "3"
-                ? "Mandatory for 2nd & 3rd year students."
-                : "Share a public Google Drive link. First Enter your year"}
+              Share a public Google Drive link to your resume.
             </FieldDescription>
           </Field>
 
