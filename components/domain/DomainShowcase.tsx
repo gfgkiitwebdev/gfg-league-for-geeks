@@ -76,7 +76,7 @@ const MOCK_DOMAINS: Domain[] = [
     id: "015",
     name: "COMPETITIVE PROGRAMMING",
     description:
-      "Solving complex algorithmic challenges with speed and efficiency. Mastering data structures and algorithms.",
+      "Ready to conquer algorithms and data structures? Join the GFG CP Squad! Eliminate TLE fears, crack tough problems, and master the algorithmic arena. Think fast, code faster — sharpen your logic, push your limits, and rise as a competitive programming pro. Your journey starts now.",
     type: "Tech",
     image: "/cp.jpeg",
   },
@@ -316,9 +316,7 @@ export default function DomainShowcase() {
           >
             {activeDomain.name}
           </h2>
-          <p
-            className="text-sm md:text-base text-gfg-text-primary font-medium leading-relaxed mb-4 md:mb-6"
-          >
+          <p className="text-sm md:text-base text-gfg-text-primary font-medium leading-relaxed mb-4 md:mb-6">
             {activeDomain.description}
           </p>
           {/* <div className="mb-2">
