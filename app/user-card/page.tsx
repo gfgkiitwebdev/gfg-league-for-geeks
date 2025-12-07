@@ -124,7 +124,6 @@ const UserCard = () => {
     }
   }, [loading, userData, router]);
 
- 
   if (!userData) {
     return null;
   }
@@ -355,6 +354,24 @@ const UserCard = () => {
           >
             {isSharing ? "Generating..." : "Share it on your instagram"}
           </button>
+        </div>
+        {/* WhatsApp Group CTA */}
+        <div className="mt-4 flex flex-col items-center text-center px-4">
+          <Link
+            href="https://chat.whatsapp.com/HjmjXRE7AXQKVsfznNDpsd?mode=hqrt3"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-700 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg text-sm transition-all duration-200"
+          >
+            Join Event WhatsApp Group
+          </Link>
+          <p
+            className="mt-3 text-xs text-black/70 max-w-sm text-center leading-relaxed 
+   border-t border-white/20 pt-3"
+          >
+            Make sure to join this group for all future announcements, updates,
+            and any queries you may have.
+          </p>
         </div>
       </div>
     </div>
