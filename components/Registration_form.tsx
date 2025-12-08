@@ -78,27 +78,27 @@ const Registration_form = () => {
     loadFingerprint();
   }, []);
 
-  useEffect(() => {
-    const verifyDevice = async () => {
-      if (!formData.deviceId) return;
+  // useEffect(() => {
+  //   const verifyDevice = async () => {
+  //     if (!formData.deviceId) return;
 
-      const res = await fetch("/api/check-device", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ deviceId: formData.deviceId }),
-      });
+  //     const res = await fetch("/api/check-device", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ deviceId: formData.deviceId }),
+  //     });
 
-      const data = await res.json();
+  //     const data = await res.json();
 
-      if (data.registered) {
-        localStorage.setItem("id",data.id);
-        localStorage.setItem("isRegistrated","true");
-        router.push("/user-card");
-      }
-    };
+  //     if (data.registered) {
+  //       localStorage.setItem("id",data.id);
+  //       localStorage.setItem("isRegistrated","true");
+  //       router.push("/user-card");
+  //     }
+  //   };
 
-    verifyDevice();
-  }, [formData.deviceId]);
+  //   verifyDevice();
+  // }, [formData.deviceId]);
 
   const handleSubmit = async () => {
     try {
@@ -131,12 +131,18 @@ const Registration_form = () => {
 
       toast.success("Successfully registered");
       setTimeout(() => {
-        router.push("/user-card");
+        router.push("/");
       }, 1000);
     } catch (error) {
       console.error("Submit Error:", error);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("id")) {
+      router.push("/user-card");
+    }
+  }, []);
   return (
     <div className="w-full max-w-5xl text-white bg-black/20 p-4 sm:p-6 lg:p-8 rounded-2xl border border-white/10 backdrop-blur-md shadow-2xl">
       <FieldSet>

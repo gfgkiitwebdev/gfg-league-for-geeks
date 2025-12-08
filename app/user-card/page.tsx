@@ -32,6 +32,7 @@ const UserCard = () => {
   const [isSharing, setIsSharing] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  
   const handleShareToInstagram = async () => {
     if (!cardRef.current) return;
 
