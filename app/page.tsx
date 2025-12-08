@@ -256,33 +256,69 @@ const Home = () => {
               </motion.div>
 
               {/* REGISTER BUTTON */}
-              <Link href={isUserRegistered ? "user-card" : "/registeration"}>
-                <motion.button
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  whileHover={{ scale: 1.06 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ duration: 0.5 }}
-                  className="group relative inline-flex items-center gap-3 bg-red-600 hover:bg-red-500
-                  text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg border-4 border-black"
-                >
-                  {/* Spinning Pokeball */}
-                  <motion.div
-                    animate={{ rotate: [0, 360] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 2,
-                      ease: "linear",
-                    }}
-                    className="w-8 h-8 relative bg-white rounded-full border-2 border-black overflow-hidden"
+              <div className="flex justify-center items-center gap-4 flex-col sm:flex-row w-full px-4">
+                {/* REGISTER BUTTON */}
+                <Link href="/registeration" className="w-full max-w-sm">
+                  <motion.button
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    whileHover={{ scale: 1.06 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.5 }}
+                    className="group relative flex justify-center items-center gap-3
+        bg-red-600 hover:bg-red-500 text-white 
+        w-full py-3 sm:py-4 
+        rounded-full text-lg sm:text-xl font-bold 
+        shadow-lg border-4 border-black"
                   >
-                    <div className="absolute top-0 w-full h-1/2 bg-red-600 border-b-2 border-black"></div>
-                    <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-white border-2 border-black rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-                  </motion.div>
+                    {/* Pokeball */}
+                    <motion.div
+                      animate={{ rotate: [0, 360] }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: 2,
+                        ease: "linear",
+                      }}
+                      className="w-6 h-6 sm:w-8 sm:h-8 relative bg-white rounded-full border-2 border-black overflow-hidden"
+                    >
+                      <div className="absolute top-0 w-full h-1/2 bg-red-600 border-b-2 border-black"></div>
+                      <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-white border-2 border-black rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                    </motion.div>
+                    Register Now
+                  </motion.button>
+                </Link>
 
-                  {isUserRegistered ? "Check your Card" : "Register Now"}
-                </motion.button>
-              </Link>
+                {/* CHECK CARD BUTTON */}
+                <Link href="/getCard" className="w-full max-w-sm">
+                  <motion.button
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    whileHover={{ scale: 1.06 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.5 }}
+                    className="group relative flex justify-center items-center gap-3
+        bg-red-600 hover:bg-red-500 text-white 
+        w-full py-3 sm:py-4 
+        rounded-full text-lg sm:text-xl font-bold 
+        shadow-lg border-4 border-black"
+                  >
+                    {/* Pokeball */}
+                    <motion.div
+                      animate={{ rotate: [0, 360] }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: 2,
+                        ease: "linear",
+                      }}
+                      className="w-6 h-6 sm:w-8 sm:h-8 relative bg-white rounded-full border-2 border-black overflow-hidden"
+                    >
+                      <div className="absolute top-0 w-full h-1/2 bg-red-600 border-b-2 border-black"></div>
+                      <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-white border-2 border-black rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                    </motion.div>
+                    Check your Card
+                  </motion.button>
+                </Link>
+              </div>
             </motion.div>
           </div>
         </div>

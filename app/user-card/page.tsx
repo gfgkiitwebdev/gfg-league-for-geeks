@@ -32,6 +32,7 @@ const UserCard = () => {
   const [isSharing, setIsSharing] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
   const handleShareToInstagram = async () => {
     if (!cardRef.current) return;
 
@@ -372,6 +373,18 @@ const UserCard = () => {
             Make sure to join this group for all future announcements, updates,
             and any queries you may have.
           </p>
+          <Link
+            href="/"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center justify-center 
+  px-6 py-3 rounded-full font-bold text-sm
+  bg-[#12301e] hover:bg-[#1b4b2e] text-white
+  border-2 border-[#c5a059] shadow-lg
+  tracking-wide transition-all duration-200
+  hover:scale-[1.03] active:scale-[0.97]"
+          >
+            ⬅ Back to Homepage
+          </Link>
         </div>
       </div>
     </div>

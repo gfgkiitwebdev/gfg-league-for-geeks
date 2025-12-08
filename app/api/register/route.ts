@@ -20,7 +20,7 @@ const registrationSchema = z.object({
   whyGfg: z.string().min(5, "Please explain why you want to join"),
 
   domain1: z.string().min(1, "Domain 1 is required"),
-  deviceId: z.string().min(8, "Invalid device fingerprint"),
+  deviceId: z.string().optional(),
   avatar: z.string().optional(),
 });
 
@@ -48,19 +48,19 @@ export async function POST(request: Request) {
 
     // Connect to DB
     await dbConnect();
-    const existingDevice = await Registration.findOne({
-      deviceId: data.deviceId,
-    });
+    // const existingDevice = await Registration.findOne({
+    //   deviceId: data.deviceId,
+    // });
 
-    if (existingDevice) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "This device has already submitted the form.",
-        },
-        { status: 400 }
-      );
-    }
+    // if (existingDevice) {
+    //   return NextResponse.json(
+    //     {
+    //       success: false,
+    //       message: "This device has already submitted the form.",
+    //     },
+    //     { status: 400 }
+    //   );
+    // }
 
     // Prevent duplicate email
     const existing = await Registration.findOne({ email: data.email });
