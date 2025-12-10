@@ -9,6 +9,38 @@ import { motion } from "framer-motion";
 // Mock data structure - this would come from your backend
 const MOCK_DOMAINS: Domain[] = [
   {
+    id: "010",
+    name: "SYSTEMS DEV",
+    description:
+      "Turn your DSA knowledge into wonderful projects. Befriend the command line and Linux OS.  Learn about how to design applications for millions of users.",
+    type: "Tech",
+    image: "/systems-dev.png",
+  },
+  {
+    id: "013",
+    name: "CLOUD",
+    description:
+      "Building legendary infrastructures in the cloud, where resilience, automation, and speed rule the battlefield.",
+    type: "Tech",
+    image: "/cloud.jpeg",
+  },
+  {
+    id: "011",
+    name: "BLOCKCHAIN",
+    description:
+    "Decentralizing the future with Web3 technologies. Smart contracts, DApps, and the revolution of trust.",
+    type: "Tech",
+    image: "/blockchain.jpeg",
+  },
+  {
+    id: "012",
+    name: "GAME DEV",
+    description:
+      "Game development is the ultimate power trip. It's the art of turning boring lines of code into living, breathing worlds. You aren't just a coder here, you are the architect of physics, the director of drama, and the master of fun. Why just play the hero when you can build the universe?",
+    type: "Tech",
+    image: "/game-dev.jpg",
+  },
+  {
     id: "001",
     name: "WEB DEV",
     description:
@@ -31,38 +63,6 @@ const MOCK_DOMAINS: Domain[] = [
       "Step into AI/ML where machines learn faster than you can blink, patterns hide in data like secrets, and every prediction feels like a Pikachu Thunderbolt to your brain. Curious? Good—it's supposed to shock you!",
     type: "Tech",
     image: "/ai-ml.jpeg",
-  },
-  {
-    id: "010",
-    name: "SYSTEMS DEV",
-    description:
-      "Turn your DSA knowledge into wonderful projects. Befriend the command line and Linux OS.  Learn about how to design applications for millions of users.",
-    type: "Tech",
-    image: "/systems-dev.png",
-  },
-  {
-    id: "011",
-    name: "BLOCKCHAIN",
-    description:
-      "Decentralizing the future with Web3 technologies. Smart contracts, DApps, and the revolution of trust.",
-    type: "Tech",
-    image: "/blockchain.jpeg",
-  },
-  {
-    id: "012",
-    name: "GAME DEV",
-    description:
-      "Game development is the ultimate power trip. It's the art of turning boring lines of code into living, breathing worlds. You aren't just a coder here, you are the architect of physics, the director of drama, and the master of fun. Why just play the hero when you can build the universe?",
-    type: "Tech",
-    image: "/game-dev.jpg",
-  },
-  {
-    id: "013",
-    name: "CLOUD",
-    description:
-      "Building legendary infrastructures in the cloud, where resilience, automation, and speed rule the battlefield.",
-    type: "Tech",
-    image: "/cloud.jpeg",
   },
   {
     id: "014",
