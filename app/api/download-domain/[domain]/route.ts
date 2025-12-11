@@ -16,6 +16,9 @@ export async function GET(
     if (domain === "AI-ML") {
       domain = "AI/ML";
     }
+    if (domain === "UI-UX") {
+      domain = "UI/UX";
+    }
     
     console.log(`Searching for domain: "${domain}"`);
 
