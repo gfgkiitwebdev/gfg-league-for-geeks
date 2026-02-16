@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import background from "@/public/trapped-bg.png";
 import GalleryCarousel from "@/components/GalleryCarousel";
+import InfoPanel from "@/components/InfoPanel";
 
 const whatsappGroupLink="https://chat.whatsapp.com/DaeP2oi13EE9kRT5GeCjf1"
 // Navbar links
@@ -172,7 +173,7 @@ const Home = () => {
             {/* Action Buttons Container */}
             <div className="flex flex-col md:flex-row gap-6 w-full justify-center items-center">
               {/* Register Button (Primary) */}
-              <Link href="/registeration" className="w-full max-w-xs md:order-2">
+              <Link href="/registration" className="w-full max-w-xs md:order-2">
                 <motion.button
                   whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(59, 130, 246, 0.5)" }}
                   whileTap={{ scale: 0.98 }}
@@ -201,6 +202,8 @@ const Home = () => {
             </div>
           </motion.div>
         </div>
+
+        <InfoPanel />
 
         <GalleryCarousel />
       </main>
