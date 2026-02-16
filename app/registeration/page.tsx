@@ -1,4 +1,4 @@
-import Registration_form from "@/components/Registration_form";
+import RegistrationGate from "@/components/RegistrationGate";
 import Image from "next/image";
 import gfgImage from "@/public/image.png";
 
@@ -14,14 +14,18 @@ export default function Page() {
           className="w-20 sm:w-28 md:w-40 lg:w-48 h-auto"
         />
       </div>
+
       <div className="flex mt-20 sm:mt-16 md:mt-10 min-h-screen items-center justify-center">
-        <div className="w-full max-w-6xl space-y-8 px-4">
+        <div className="w-full max-w-6xl space-y-8 px-4 flex flex-col items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl sm:text-4xl font-semibold text-white/90 mb-3">
-              Trapped 2.0
+              GFG Trapped 2.0
             </h1>
           </div>
-          <Registration_form />
+
+          <>
+            <RegistrationGate />
+          </>
         </div>
       </div>
     </div>

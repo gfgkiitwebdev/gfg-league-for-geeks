@@ -90,6 +90,7 @@ const Registration_form = () => {
       }
 
       toast.success("Team registered successfully 🚀");
+      localStorage.setItem("isRegistrated", "true");
     } catch (err) {
       console.error(err);
       toast.error("Something went wrong");
@@ -157,7 +158,7 @@ const Registration_form = () => {
                     onChange={(e) =>
                       handleMemberChange(index, "roll", e.target.value)
                     }
-                    placeholder="2105XXXX"
+                    placeholder="2305XXXX"
                     className="bg-black/20 border-white/20 text-white"
                   />
                 </Field>
