@@ -98,6 +98,7 @@ const Registration_form = () => {
 
       toast.success("Team registered successfully 🚀");
       localStorage.setItem("isRegistrated", "true");
+      window.location.reload();
     } catch (err) {
       console.error(err);
       toast.error("Something went wrong");
