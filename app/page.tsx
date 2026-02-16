@@ -2,21 +2,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import DomainShowcase from "@/components/domain/DomainShowcase";
 import gfgLogo from "@/public/image.png";
-import background from "@/public/background.png";
+import background from "@/public/trapped-story.png";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-
+const whatsappGroupLink="https://chat.whatsapp.com/DaeP2oi13EE9kRT5GeCjf1"
 // Navbar links
 const navLinks = [
   { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
   {
-    name: "Events",
-    href: "https://chat.whatsapp.com/HjmjXRE7AXQKVsfznNDpsd?mode=hqrt3",
+    name: "Whatsapp",
+    href: whatsappGroupLink,
   },
-  { name: "Team", href: "#team" },
   { name: "Alumni", href: "https://www.gfgkiit.in/alumni" },
 ];
 
@@ -136,56 +133,19 @@ const Home = () => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative w-full max-w-lg aspect-3/1 mb-12"
+            className="relative w-full max-w-lg aspect-50/25 mb-12"
           >
             <Image
-              src="/lfg.png"
+              src="/trapped-hero-image.png"
               alt="League For Geeks"
               fill
-              className="object-contain drop-shadow-[0_0_25px_rgba(255,255,0,0.3)]"
+              className="object-contain drop-shadow-[0_0_50px_rgba(255,255,0,0.3)]"
               priority
             />
           </motion.div>
 
           {/* Pokémon + TEXT */}
           <div className="relative w-full max-w-4xl mx-auto mb-20 flex justify-center items-center">
-            {/* Floating Pokémon Left */}
-            <motion.div
-              initial={{ x: -50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1, y: [0, -10, 0] }}
-              transition={{
-                duration: 1,
-                delay: 0.4,
-                y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-              }}
-              className="hidden sm:block absolute -left-10 md:-left-20 top-1/2 -translate-y-1/2 w-28 md:w-48 h-28 md:h-48"
-            >
-              <Image
-                src="/pikachu.png"
-                alt="Pikachu"
-                fill
-                className="object-contain"
-              />
-            </motion.div>
-
-            {/* Floating Pokémon Right */}
-            <motion.div
-              initial={{ x: 50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1, y: [0, -10, 0] }}
-              transition={{
-                duration: 1,
-                delay: 0.4,
-                y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-              }}
-              className="hidden sm:block absolute -right-10 md:-right-20 top-1/2 -translate-y-1/2 w-28 md:w-48 h-28 md:h-48"
-            >
-              <Image
-                src="/nilapoke.png"
-                alt="Squirtle"
-                fill
-                className="object-contain"
-              />
-            </motion.div>
 
             {/* TEXT BLOCK WITH ANIMATION */}
             <motion.div
@@ -195,26 +155,19 @@ const Home = () => {
               className="text-center max-w-2xl z-10 space-y-8"
             >
               <p className="text-base md:text-xl leading-relaxed font-medium ">
-                This is the first trial of our recruitment journey — a
-                Pokémon-inspired, hackathon-based recruitment event crafted to
-                test how you think, how you build, and how you adapt.
+                Gather your friends for the best escape room event of KIIT. Calling all problem solvers, logic leaders and those who want to have a good time.
                 <br />
                 <br />
                 <span className="font-bold text-green-900 text-lg">
-                  Event Dates:
+                  Event Date:
                 </span>
                 <br />
                 <span className="block mt-1">
                   •{" "}
                   <span className="font-semibold">
-                    13th December (Saturday)
+                    21st February (Saturday)
                   </span>{" "}
                   — Hackathon
-                </span>
-                <span className="block">
-                  •{" "}
-                  <span className="font-semibold">14th December (Sunday)</span>{" "}
-                  — Prize Distribution & Final Proceedings
                 </span>
               </p>
 
@@ -233,7 +186,7 @@ const Home = () => {
                 />
 
                 <motion.a
-                  href="https://chat.whatsapp.com/HjmjXRE7AXQKVsfznNDpsd?mode=hqrt3"
+                  href={whatsappGroupLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.07 }}
@@ -271,62 +224,17 @@ const Home = () => {
         rounded-full text-lg sm:text-xl font-bold 
         shadow-lg border-4 border-black"
                   >
-                    {/* Pokeball */}
-                    <motion.div
-                      animate={{ rotate: [0, 360] }}
-                      transition={{
-                        repeat: Infinity,
-                        duration: 2,
-                        ease: "linear",
-                      }}
-                      className="w-6 h-6 sm:w-8 sm:h-8 relative bg-white rounded-full border-2 border-black overflow-hidden"
-                    >
-                      <div className="absolute top-0 w-full h-1/2 bg-red-600 border-b-2 border-black"></div>
-                      <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-white border-2 border-black rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-                    </motion.div>
                     Register Now
                   </motion.button>
                 </Link>
 
-                {/* CHECK CARD BUTTON */}
-                <Link href="/getCard" className="w-full max-w-sm">
-                  <motion.button
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    whileHover={{ scale: 1.06 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.5 }}
-                    className="group relative flex justify-center items-center gap-3
-        bg-red-600 hover:bg-red-500 text-white 
-        w-full py-3 sm:py-4 
-        rounded-full text-lg sm:text-xl font-bold 
-        shadow-lg border-4 border-black"
-                  >
-                    {/* Pokeball */}
-                    <motion.div
-                      animate={{ rotate: [0, 360] }}
-                      transition={{
-                        repeat: Infinity,
-                        duration: 2,
-                        ease: "linear",
-                      }}
-                      className="w-6 h-6 sm:w-8 sm:h-8 relative bg-white rounded-full border-2 border-black overflow-hidden"
-                    >
-                      <div className="absolute top-0 w-full h-1/2 bg-red-600 border-b-2 border-black"></div>
-                      <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-white border-2 border-black rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-                    </motion.div>
-                    Check your Card
-                  </motion.button>
-                </Link>
+                
               </div>
             </motion.div>
           </div>
         </div>
 
-        {/* TEAM / DOMAIN SHOWCASE */}
-        <div className="w-full z-10 mt-8 px-4" id="team">
-          <DomainShowcase />
-        </div>
+
       </main>
     </div>
   );
