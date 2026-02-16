@@ -39,21 +39,11 @@ export async function POST(req: NextRequest) {
     }
 
     const emails = members.map((m: TeamMember) => m.email.toLowerCase().trim());
+
     if (new Set(emails).size !== emails.length) {
       return NextResponse.json(
         { message: "Duplicate emails are not allowed in the same team" },
         { status: 400 },
-      );
-    }
-
-    const existingEmail = await TeamRegistration.findOne({
-      "members.email": { $in: emails },
-    });
-
-    if (existingEmail) {
-      return NextResponse.json(
-        { message: "One or more members already registered in another team" },
-        { status: 409 },
       );
     }
 

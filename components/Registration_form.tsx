@@ -106,12 +106,12 @@ const Registration_form = () => {
   };
 
   return (
-    <div className="w-full max-w-5xl text-white bg-black/20 p-4 sm:p-6 lg:p-8 rounded-2xl border border-white/10 backdrop-blur-md shadow-2xl">
+    <div className="w-full max-w-5xl text-white bg-black/40 backdrop-blur-xl p-6 sm:p-8 lg:p-10 rounded-3xl border border-white/10 shadow-2xl shadow-blue-900/20">
       <FieldSet>
-        <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4">
+        <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-5">
           {/* Team Name */}
           <Field className="md:col-span-2">
-            <FieldLabel className="text-base sm:text-lg font-semibold">
+            <FieldLabel className="text-lg font-semibold text-cyan-300">
               Team Name
             </FieldLabel>
             <Input
@@ -119,34 +119,36 @@ const Registration_form = () => {
               value={teamName}
               onChange={(e) => setTeamName(e.target.value)}
               placeholder="Enter your team name"
-              className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-green-400 focus:ring-green-400/20"
+              className="bg-slate-900/60 border border-white/10 text-white placeholder:text-white/40 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 rounded-xl"
             />
           </Field>
 
-          {/* Members Section */}
+          {/* Members */}
           {members.map((member, index) => (
             <div
               key={index}
-              className="md:col-span-2 border border-white/10 rounded-xl p-4 bg-black/30"
+              className="md:col-span-2 border border-white/10 rounded-2xl p-5 bg-slate-900/50 backdrop-blur-md shadow-lg"
             >
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-semibold text-green-400">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-semibold text-cyan-400 drop-shadow">
                   Member {index + 1}
                 </h2>
+
                 {members.length > 1 && (
                   <Button
                     type="button"
                     variant="destructive"
                     onClick={() => removeMember(index)}
+                    className="bg-red-600/80 hover:bg-red-500 border border-red-400/20"
                   >
                     Remove
                   </Button>
                 )}
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Field>
-                  <FieldLabel>Name</FieldLabel>
+                  <FieldLabel className="text-white/80">Name</FieldLabel>
                   <Input
                     type="text"
                     value={member.name}
@@ -154,12 +156,12 @@ const Registration_form = () => {
                       handleMemberChange(index, "name", e.target.value)
                     }
                     placeholder="Full Name"
-                    className="bg-black/20 border-white/20 text-white"
+                    className="bg-slate-900/60 border border-white/10 text-white placeholder:text-white/40 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 rounded-xl"
                   />
                 </Field>
 
                 <Field>
-                  <FieldLabel>Roll Number</FieldLabel>
+                  <FieldLabel className="text-white/80">Roll Number</FieldLabel>
                   <Input
                     type="text"
                     value={member.roll}
@@ -167,12 +169,12 @@ const Registration_form = () => {
                       handleMemberChange(index, "roll", e.target.value)
                     }
                     placeholder="2305XXXX"
-                    className="bg-black/20 border-white/20 text-white"
+                    className="bg-slate-900/60 border border-white/10 text-white placeholder:text-white/40 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 rounded-xl"
                   />
                 </Field>
 
                 <Field>
-                  <FieldLabel>Email</FieldLabel>
+                  <FieldLabel className="text-white/80">Email</FieldLabel>
                   <Input
                     type="email"
                     value={member.email}
@@ -180,25 +182,26 @@ const Registration_form = () => {
                       handleMemberChange(index, "email", e.target.value)
                     }
                     placeholder="abc@gmail.com"
-                    className="bg-black/20 border-white/20 text-white"
+                    className="bg-slate-900/60 border border-white/10 text-white placeholder:text-white/40 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 rounded-xl"
                   />
                 </Field>
               </div>
             </div>
           ))}
 
-          {/* Add Member Button */}
+          {/* Add Member */}
           <Field className="md:col-span-2">
             <Button
               type="button"
               onClick={addMember}
-              className="w-full bg-blue-600 hover:bg-blue-700"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold shadow-lg shadow-blue-900/30 border border-white/10 transition-all"
             >
               + Add Member (Max 3)
             </Button>
-            <FieldDescription className="text-xs text-white/60 mt-1">
-              Minimum 1 member and maximum 3 members allowed per team. Duplicate
-              emails are not allowed.
+
+            <FieldDescription className="text-xs text-white/60 mt-2 text-center">
+              Minimum 1 and maximum 3 members allowed per team. Duplicate emails
+              are not allowed.
             </FieldDescription>
           </Field>
 
@@ -206,9 +209,13 @@ const Registration_form = () => {
           <Button
             type="button"
             onClick={handleSubmit}
-            className="w-full mt-2 bg-green-600 hover:bg-green-700 text-white font-semibold md:col-span-2"
+            className="w-full mt-3 py-6 text-lg font-bold tracking-wide rounded-2xl bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-[length:200%_200%] hover:from-blue-500 hover:via-cyan-400 hover:to-blue-500 text-white shadow-[0_0_25px_rgba(56,189,248,0.35)] hover:shadow-[0_0_45px_rgba(56,189,248,0.55)] border border-white/10 transition-all duration-300 ease-out hover:scale-[1.02] active:scale-[0.98] backdrop-blur-md md:col-span-2
+  "
           >
-            Submit Team Registration
+            <span className="flex items-center justify-center gap-2">
+              Submit Team Registration
+              <span className="text-xl">🚀</span>
+            </span>
           </Button>
         </FieldGroup>
       </FieldSet>
