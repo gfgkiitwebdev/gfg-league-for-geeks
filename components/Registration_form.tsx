@@ -90,7 +90,11 @@ const Registration_form = () => {
       });
 
       const data = await res.json();
-
+      await fetch("/api/save-to-sheet", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data.saved),
+      }).catch((err) => console.log("Sheet Sync Error:", err));
       if (!res.ok) {
         toast.error(data.message || "Registration failed");
         return;
