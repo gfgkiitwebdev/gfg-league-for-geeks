@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GFG League for Geeks",
+  title: "GFG Trapped 2.0",
   description:
-    "Join the GeeksforGeeks community at KIIT. Register now to be part of exciting opportunities!",
+    "Gather your friends for the best escape room event of KIIT. Calling all problem solvers, logic leaders, and those who want to have a good time.Brought to you by the Game Development Domain of GFG KIIT.",
 };
 
 export default function RootLayout({

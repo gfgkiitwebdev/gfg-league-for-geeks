@@ -1,126 +1,103 @@
-import { NextResponse } from "next/server";
-import { z } from "zod";
+import { NextRequest, NextResponse } from "next/server";
 import { dbConnect } from "@/lib/dbConnect";
-import Registration from "@/models/Registration";
+import TeamRegistration from "@/models/Registration";
+import { registerRateLimit } from "@/lib/ratelimit";
+// import { appendToSheet } from "@/lib/googleSheets"; // 👈 NEW IMPORT
 
-const registrationSchema = z.object({
-  username: z.string().min(2, "Name must be at least 2 characters"),
-  contact: z.string().regex(/^[0-9]{10}$/, "Contact must be a 10-digit number"),
-  email: z
-    .string()
-    .email("Invalid email format")
-    .regex(/@kiit\.ac\.in$/, "Only KIIT email allowed"),
-  year: z.enum(["1", "2", "3"]),
+export interface TeamMember {
+  name: string;
+  roll: string;
+  email: string;
+}
 
-  resumeLink: z.string().optional(),
-
-  github: z.string().optional().or(z.literal("")),
-  linkedin: z.string().optional().or(z.literal("")),
-
-  whyGfg: z.string().min(5, "Please explain why you want to join"),
-
-  domain1: z.string().min(1, "Domain 1 is required"),
-  deviceId: z.string().optional(),
-  avatar: z.string().optional(),
-});
-
-export async function POST(request: Request) {
+export async function POST(req: NextRequest) {
   try {
-    const body = await request.json();
+    const ip = req.headers.get("x-forwarded-for") ?? req.headers.get("x-real-ip") ?? "127.0.0.1";
+    const { success, limit, reset, remaining } =
+      await registerRateLimit.limit(ip);
 
-    // Validate input
-    const parsed = registrationSchema.safeParse(body);
-
-    if (!parsed.success) {
-      const flat = parsed.error.flatten().fieldErrors;
-      const firstError = Object.values(flat)[0]?.[0] || "Validation Failed";
-
+    if (!success) {
       return NextResponse.json(
+        { message: "Too many attempts. Please try again in a minute." },
         {
-          success: false,
-          message: firstError,
+          status: 429,
+          headers: {
+            "X-RateLimit-Limit": limit.toString(),
+            "X-RateLimit-Remaining": remaining.toString(),
+            "X-RateLimit-Reset": reset.toString(),
+          },
         },
-        { status: 400 }
       );
     }
-
-    const data = parsed.data;
-
-    // Connect to DB
     await dbConnect();
-    // const existingDevice = await Registration.findOne({
-    //   deviceId: data.deviceId,
-    // });
 
-    // if (existingDevice) {
-    //   return NextResponse.json(
-    //     {
-    //       success: false,
-    //       message: "This device has already submitted the form.",
-    //     },
-    //     { status: 400 }
-    //   );
-    // }
+    const body = await req.json();
+    const { teamName, members } = body;
 
-    // Prevent duplicate email
-    const existing = await Registration.findOne({ email: data.email });
-    if (existing) {
+    if (!teamName || !members) {
       return NextResponse.json(
-        {
-          success: false,
-          message: "This email is already registered",
-        },
-        { status: 400 }
+        { message: "Team name and members are required" },
+        { status: 400 },
       );
     }
 
-    // Save to DB
-    const saved = await Registration.create(data);
+    if (!Array.isArray(members) || members.length < 1 || members.length > 3) {
+      return NextResponse.json(
+        { message: "Team must have 1 to 3 members" },
+        { status: 400 },
+      );
+    }
+
+    for (const member of members) {
+      if (!member.name || !member.roll || !member.email) {
+        return NextResponse.json(
+          { message: "All member fields are required" },
+          { status: 400 },
+        );
+      }
+    }
+
+    const emails = members.map((m: TeamMember) => m.email.toLowerCase().trim());
+
+    if (new Set(emails).size !== emails.length) {
+      return NextResponse.json(
+        { message: "Duplicate emails are not allowed in the same team" },
+        { status: 400 },
+      );
+    }
+
+    const existingTeam = await TeamRegistration.findOne({
+      teamName: teamName.trim(),
+    });
+
+    if (existingTeam) {
+      return NextResponse.json(
+        { message: "Team name already taken" },
+        { status: 409 },
+      );
+    }
+
+    // 1️⃣ Save to MongoDB (Primary Database)
+    const saved = await TeamRegistration.create({
+      teamName: teamName.trim(),
+      members,
+    });
+
+    // 2️⃣ Save to Google Sheets (Secondary Backup)
+    // await appendToSheet(teamName.trim(), members);
 
     return NextResponse.json(
       {
-        success: true,
-        message: "Registration submitted successfully!",
+        message: "Team registered successfully",
         saved,
       },
-      { status: 200 }
+      { status: 201 },
     );
-  } catch (error) {
-    console.error("Server Error:", error);
+  } catch (error: unknown) {
+    console.error("Team Registration Error:", error);
     return NextResponse.json(
-      { success: false, message: "Server Error", error },
-      { status: 500 }
-    );
-  }
-}
-
-export async function GET(request: Request) {
-  try {
-    await dbConnect();
-
-    // Get URL parameters
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get("id");
-
-    if (id) {
-      const data = await Registration.findById(id);
-      if (!data) {
-        return NextResponse.json(
-          { success: false, message: "Registration not found" },
-          { status: 404 }
-        );
-      }
-      return NextResponse.json({ success: true, data }, { status: 200 });
-    }
-
-    // If no ID, fetch all
-    const data = await Registration.find().sort({ createdAt: -1 });
-    return NextResponse.json({ success: true, data }, { status: 200 });
-  } catch (error) {
-    console.error("Server Error:", error);
-    return NextResponse.json(
-      { success: false, message: "Server Error", error },
-      { status: 500 }
+      { message: "Internal Server Error" },
+      { status: 500 },
     );
   }
 }

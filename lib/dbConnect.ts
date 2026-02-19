@@ -8,23 +8,14 @@ if (!MONGODB_URI) {
   );
 }
 
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
-
 export async function dbConnect(): Promise<Mongoose> {
-  if (cached.conn) return cached.conn;
-
-  if (!cached.promise) {
-    cached.promise = mongoose
-      .connect(MONGODB_URI, {
-        autoIndex: process.env.NODE_ENV !== "production",
-      })
-      .then((m) => m);
+  // Check if we already have an active connection state
+  if (mongoose.connection.readyState >= 1) {
+    return mongoose as unknown as Mongoose;
   }
 
-  cached.conn = await cached.promise;
-  return cached.conn;
+  console.log("Mongo URI Loaded:", !!process.env.MONGODB_URI);
+  return await mongoose.connect(MONGODB_URI, {
+    autoIndex: process.env.NODE_ENV !== "production",
+  });
 }
