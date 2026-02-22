@@ -61,7 +61,6 @@ const Registration_form = () => {
   const handleSubmit = async () => {
     if (isSubmitting) return;
 
-    setIsSubmitting(true);
     if (!teamName.trim()) {
       toast.error("Team name is required");
       return;
@@ -86,6 +85,8 @@ const Registration_form = () => {
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
       const res = await fetch("/api/register", {
         method: "POST",
@@ -94,23 +95,26 @@ const Registration_form = () => {
       });
 
       const data = await res.json();
+
       if (!res.ok) {
         toast.error(data.message || "Registration failed");
-        setIsSubmitting(false);
         return;
       }
-      await fetch("/api/save-to-sheet", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data.saved),
-      }).catch((err) => console.log("Sheet Sync Error:", err));
 
       toast.success("Team registered successfully 🚀");
+
+      // Reset form instead of reload (faster UX)
+      setTeamName("");
+      setMembers([{ name: "", roll: "", email: "" }]);
+
       localStorage.setItem("isRegistrated", "true");
       window.location.reload();
     } catch (err) {
       console.error(err);
-      toast.error("Something went wrong");
+      toast.error("Network error. Please try again.");
+    } finally {
+      // 🔥 ALWAYS resets (no stuck button ever)
+      setIsSubmitting(false);
     }
   };
 
@@ -218,13 +222,13 @@ const Registration_form = () => {
           <Button
             type="button"
             onClick={handleSubmit}
-            disabled={isSubmitting} 
+            disabled={isSubmitting}
             className="w-full mt-3 py-6 text-lg font-bold tracking-wide rounded-2xl bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-[length:200%_200%] hover:from-blue-500 hover:via-cyan-400 hover:to-blue-500 text-white shadow-[0_0_25px_rgba(56,189,248,0.35)] hover:shadow-[0_0_45px_rgba(56,189,248,0.55)] border border-white/10 transition-all duration-300 ease-out hover:scale-[1.02] active:scale-[0.98] backdrop-blur-md md:col-span-2
   "
           >
             <span className="flex items-center justify-center gap-2">
-              Submit Team Registration
-              <span className="text-xl">🚀</span>
+              {isSubmitting ? "Submitting..." : "Submit Team Registration"}
+              <span className="text-xl">{isSubmitting ? "⏳" : "🚀"}</span>
             </span>
           </Button>
         </FieldGroup>
